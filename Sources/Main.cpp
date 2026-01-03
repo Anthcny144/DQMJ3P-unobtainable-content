@@ -40,7 +40,7 @@ namespace CTRPluginFramework {
         while (!Game::isLoaded())
             Sleep(Seconds(0.2));
 
-        PluginMenu *_3gx = new PluginMenu(String::_3gxTitle, 3, 1, 0, String::_3gxNotes);
+        PluginMenu *_3gx = new PluginMenu(String::_3gxTitle, 3, 1, 1, String::_3gxNotes);
 
         settings.open(SETTINGS_BIN);
 

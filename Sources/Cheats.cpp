@@ -108,7 +108,7 @@ void Cheat::unobtainableContent(MenuEntry* entry) {
         bool all = choice == 0;
 
         // check storage space
-        u16 checkSize = choice == 0 ? monsters.size() : 1;
+        u16 checkSize = all ? monsters.size() : 1;
         if (!Storage::isSpaceAvailable(checkSize)) {
             MessageBoxPlus::wrap(String::error, Color::Silver << "You don't have enough space in your storage!\nYou need at least " << Color::Yellow << std::to_string(checkSize) << " slot" << String::plural(checkSize) << Color::Silver << ".");
             return;
@@ -314,7 +314,6 @@ void Cheat::wiFiCoins(MenuEntry* entry) {
 
     static std::array<std::string, 4> coinNames = {String::bronzeCoin, String::silverCoin, String::goldCoin, String::platinumCoin};
 
-    ask:
     Keyboard kb(CenterAlign(String::coinAdd));
     kb.Populate(Cheat::coinIcons);
     kb.IsHexadecimal(false);
@@ -332,7 +331,7 @@ void Cheat::wiFiCoins(MenuEntry* entry) {
     if (kb.Open(coins, coins) >= 0)
         Process::Write16(addr, std::min(coins, static_cast<u16>(Macro::MAX_WIFI_COINS)));
 
-    goto ask;
+    Cheat::wiFiCoins(entry);
 }
 
 void Cheat::j3Transfer(Item* item) {
