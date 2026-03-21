@@ -7,26 +7,23 @@ using namespace CTRPluginFramework;
 
 bool Game::isLoaded() {
     u32 val;
-    Process::Read32(ARM::Addr::LOADED, val);
+    Process::Read32(ARM::getAddr(ARM::AddrType::SAVE), val);
     Process::Read32(val, val);
 
     return val != 0;
 }
 
-bool Game::unlock(Offset unlockType, u16 id) {
-    u32 addr;
-    if (!PTR::get(PTR::Type::SAVE, addr))
+bool Game::unlock(u32 offset, u16 id) {
+    Addr addr;
+    if (!PTR::getSave(addr))
         return false;
 
-    if (!Game::isUnlockOffset(unlockType))
-        return false;
-
-    if (Game::isUnlocked(unlockType, id))
+    if (Game::isUnlocked(offset, id))
         return false;
 
     u32 byteOffs = id / 8;
     u32 bitOffs = id % 8;
-    addr += static_cast<u32>(unlockType) + byteOffs;
+    addr += (offset + byteOffs);
 
     u8 byte;
     Process::Read8(addr, byte);
@@ -36,17 +33,14 @@ bool Game::unlock(Offset unlockType, u16 id) {
     return true;
 }
 
-bool Game::isUnlocked(Offset unlockType, u16 id) {
-    u32 addr;
-    if (!PTR::get(PTR::Type::SAVE, addr))
+bool Game::isUnlocked(u32 offset, u16 id) {
+    Addr addr;
+    if (!PTR::getSave(addr))
         return false;
-
-    if (!Game::isUnlockOffset(unlockType))
-        return true;
 
     u32 byteOffs = id / 8;
     u32 bitOffs = id % 8;
-    addr += static_cast<u32>(unlockType) + byteOffs;
+    addr += (offset + byteOffs);
     
     u8 byte;
     Process::Read8(addr, byte);
@@ -54,30 +48,14 @@ bool Game::isUnlocked(Offset unlockType, u16 id) {
     return (byte & (1 << bitOffs)) != 0;
 }
 
-bool Game::isUnlockOffset(Offset offset) {
-    switch (offset) {
-        case Offset::LIB_MONSTERS:
-        case Offset::LIB_SKILLS:
-        case Offset::LIB_ABILITIES:
-        case Offset::LIB_TRAITS:
-        case Offset::LIB_ITEMS:
-        case Offset::LIB_TITLES:
-        case Offset::WIFI_STATUES_BITS:
-            return true;
-
-        default:
-            return false;
-    }
-}
-
 void Game::increaseItemCount(u16 itemId) {
-    u32 addr;
-    if (!PTR::get(PTR::Type::SAVE, addr))
+    Addr addr;
+    if (!PTR::getSave(addr))
         return;
 
     u16 count;
-    addr += Offset::INVENTORY;
-    addr += (itemId - 1) * sizeof(count);
+    addr += Offset::get(Offset::INVENTORY);
+    addr += itemId * sizeof(itemId);
 
     Process::Read16(addr, count);
     count = std::min(static_cast<u16>(count + 1), static_cast<u16>(Macro::MAX_ITEM_COUNT));

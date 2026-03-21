@@ -1,12 +1,41 @@
 #pragma once
 #include <CTRPluginFramework.hpp>
+#include "CTRPFExtension.hpp"
+#include "GameTitle.hpp"
 #include "Memory.hpp"
 #include <array>
 #include <functional>
 #include <vector>
 using namespace CTRPluginFramework;
 
-struct Monster {
+struct Content {
+    const std::string name, unlockMethod;
+    std::string colorName;
+    const u16 id;
+    VersionBits version;
+
+    Content(const std::string& name,
+            const u16 id,
+            Gradient gradient,
+            const std::string& unlockMethod,
+            VersionBits version
+    );
+
+    virtual ~Content() = default;
+
+    template<typename T>
+    static std::vector<T> get(std::vector<T>& contentList) {
+        std::vector<T> filteredList;
+
+        for (T& thing : contentList)
+            if (static_cast<u32>(thing.version) & static_cast<u32>(GameTitle::versionBits))
+                filteredList.emplace_back(thing);
+
+        return filteredList;
+    }
+};
+
+struct Monster : public Content {
     enum Size {
         SMALL = 0x46,
         NORMAL = 0x47,
@@ -15,45 +44,60 @@ struct Monster {
         ULTRA = 0x4A
     };
 
-    const std::string name, iconName, unlockMethod;
-    u16 id;
-    std::array<u32, 2> exp;
-    u16 skillId;
-    std::vector<u16> traitIds;
-    std::array<u16, 6> stats;
-    u32 checksum;
+    const std::string iconName;
+    const u32 checksum;
 
-    Monster(const std::string& name, const std::string& iconName, u16 id, std::array<u32, 2> exp, u16 skillId, std::vector<u16> traitIds, std::array<u16, 6> stats, const std::string& unlockMethod, u32 checksum = 0);
+    Monster(const std::string& name,
+            const std::string& iconName,
+            Gradient gradient,
+            u16 id,
+            const std::string& unlockMethod,
+            u32 checksum,
+            VersionBits version
+    );
 
-    static std::vector<Monster> get();
+    static std::vector<Monster>& getList();
 };
 
-struct Skill {
-    std::string name, bookName, unlockMethod;
-    u16 id, bookId;
+struct Skill : public Content {
+    const std::string bookName;
+    const u16 bookId;
 
-    Skill(const std::string& name, u16 id, u16 bookId, const std::string& bookName, const std::string& unlockMethod);
+    Skill(const std::string& name,
+          Gradient gradient,
+          u16 id,
+          u16 bookId,
+          const std::string& bookName,
+          const std::string& unlockMethod,
+          VersionBits version = VersionBits::ALL
+    );
     
-    static std::vector<Skill> get();
+    static std::vector<Skill>& getList();
 };
 
-struct Item {
-    std::string name, unlockMethod;
-    u16 id;
-    bool unlockableOnce;
-    std::function<void(Item*)> onUnlock;
+struct Item : public Content {
+    const bool unlockableOnce;
+    const std::function<void(Item*)> onUnlock;
 
-    Item(const std::string& name, u16 id, bool unlockableOnce, const std::string& unlockMethod, std::function<void(Item*)> onUnlock = nullptr);
+    Item(const std::string& name,
+         Gradient gradient,
+         u16 id,
+         bool unlockableOnce,
+         const std::string& unlockMethod,
+         std::function<void(Item*)> onUnlock = nullptr,
+         VersionBits version = VersionBits::ALL
+    );
     
-    static std::vector<Item> get();
-    static void fluffyScruffyBooks();
+    static std::vector<Item>& getList();
 };
 
-struct Title {
-    std::string name, unlockMethod;
-    u16 id;
-
-    Title(const std::string& name, u16 id, const std::string& unlockMethod);
+struct Title : public Content {
+    Title(const std::string& name,
+          u16 id,
+          Gradient gradient,
+          const std::string& unlockMethod,
+          VersionBits version = VersionBits::ALL
+    );
     
-    static std::vector<Title> get();
+    static std::vector<Title>& getList();
 };

@@ -38,7 +38,7 @@ void Settings::initData(File& file) {
         return;
     }
 
-    for (size_t i = 0; i < argsBuffer.size() / 2; i++) {
+    for (int i = 0; i < argsBuffer.size() / 2; i++) {
         std::string key = std::move(argsBuffer[i]);
         std::string val = std::move(argsBuffer[i + 1]);
 
@@ -73,8 +73,11 @@ std::string Settings::get(const std::string& key) {
     return has(key) ? data[key] : "";
 }
 
-void Settings::set(const std::string& key, const std::string& value) {
+void Settings::set(const std::string& key, const std::string& value, bool save) {
     data[key] = value;
+
+    if (save)
+        this->save();
 }
 
 void Settings::save() {

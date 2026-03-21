@@ -17,6 +17,6 @@ class Settings {
     bool open(const std::string& path);
     bool has(const std::string& key);
     std::string get(const std::string& key);
-    void set(const std::string& key, const std::string& value);
+    void set(const std::string& key, const std::string& value, bool save);
     void save();
 };

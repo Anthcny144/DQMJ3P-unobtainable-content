@@ -1,65 +1,73 @@
 #pragma once
 #include <CTRPluginFramework.hpp>
+#include <array>
 using namespace CTRPluginFramework;
 
 struct ARM {
-    enum Addr {
-        SAVE = 0x10532C, // 0x108008,
-        LOADED = 0x2D84B4,
-        WIFI_COIN_ANTICHEAT1 = 0x662534,
-        WIFI_COIN_ANTICHEAT2 = 0x25BDDC,
-        SIRLOIN_ANTICHEAT1 = 0x22983C,
-        SIRLOIN_ANTICHEAT2 = 0x6B2AE4, // 6B2AA0 -> b 0x6B2AF4
-        SIRLOIN_ANTICHEAT3 = 0x6B2AF0,
+    enum AddrType {
+        SAVE = 0,
+        HOOK_MONSTERS_CAN_BUY_SHOW,
+        HOOK_MONSTERS_CAN_BUY_FAMILIES,
+        HOOK_MONSTERS_CAN_BUY_ORIGINAL,
+        HOOK_NOT_ENOUGH_WIFI_COINS,
+        UNBUYABLE_MONSTERS
     };
+
+    static Addr getAddr(AddrType type);
+    static u32 getDefaultValue(AddrType type);
+    static u32 getBranchInstruction(Addr current, Addr dest, bool link = false);
+    static u32 UNDEF;
+
+    private:
+    struct ARMData {
+        std::array<Addr, 4> addr;
+        std::array<u32, 4> value;
+    };
+
+    static const std::vector<ARMData> data;
+    static int _getDataIdx();
 };
 
-enum Offset {
+struct Offset {
+    static u32 get(const std::array<u32, 2>& offsets);
+
     // global (from save PTR)
-    STORAGE_DATA = 0x2F4,
-    FREE_INDEX = 0x2C8,
-    WIFI_COINS = 0x274,
-    DISC_CLEARED_MONSTER_ID = 0x1D7B4,
-    DISC_CLEARED_MONSTER_CHECKSUM = 0x1D804,
-    LIB_MONSTERS = 0x1FB88,
-    LIB_ABILITIES = 0x2038C,
-    LIB_SKILLS = 0x1FE20,
-    LIB_TRAITS = 0x20348,
-    LIB_ITEMS = 0x1FD08,
-    LIB_TITLES = 0x20F38,
-    INVENTORY = 0x1E04E,
-    WIFI_STATUES_BITS = 0x1EC,
-    J3_TRANSFERED_BITS = 0x1CC,
-    GRAND_ESTARK_FIX_BITFIELD1 = 0x1F6,
-    GRAND_ESTARK_FIX_BITFIELD2 = 0x25A,
-    GRAND_ESTARK_INVENTORY_ITEMS = INVENTORY + 0xB6,
+    static std::array<u32, 2>
+    STORAGE_DATA,
+    DISC_CLEARED_MONSTER_ID,
+    DISC_CLEARED_MONSTER_CHECKSUM,
+    LIB_MONSTERS,
+    LIB_ABILITIES,
+    LIB_SKILLS,
+    LIB_TRAITS,
+    LIB_ITEMS,
+    LIB_TITLES,
+    INVENTORY,
+    WIFI_STATUES_BITS,
+    J3_TRANSFERED_BITS,
 
     // size
-    MONSTER_DATA_SIZE = 0xF0,
+    MONSTER_DATA_SIZE,
     
     // monster data
-    MSTR_NAME = 0x4,
-    MSTR_ID = 0x1C,
-    MSTR_LVL = 0x2E,
-    MSTR_MAX_HP = 0x1E,
-    MSTR_MAX_MP = 0x20,
-    MSTR_CURR_HP = 0x22,
-    MSTR_CURR_MP = 0x24,
-    MSTR_ATK = 0x26,
-    MSTR_DEF = 0x28,
-    MSTR_AGI = 0x2A,
-    MSTR_WIS = 0x2C,
-    MSTR_CURR_EXP = 0x30,
-    MSTR_NEXT_EXP = 0x34,
-    MSTR_SKILL = 0x56,
-    MSTR_SKILL_PTS = 0x3A,
-    MSTR_TRAITS = 0x44
+    MSTR_NAME,
+    MSTR_ID,
+    MSTR_LVL,
+    MSTR_MAX_HP,
+    MSTR_MAX_MP,
+    MSTR_CURR_HP,
+    MSTR_CURR_MP,
+    MSTR_ATK,
+    MSTR_DEF,
+    MSTR_AGI,
+    MSTR_WIS,
+    MSTR_CURR_EXP,
+    MSTR_NEXT_EXP,
+    MSTR_SKILL,
+    MSTR_SKILL_PTS,
+    MSTR_TRAITS;
 };
 
 struct PTR {
-    enum class Type {
-        SAVE
-    };
-
-    static bool get(PTR::Type type, u32& outAddr);
+    static bool getSave(Addr& outAddr);
 };

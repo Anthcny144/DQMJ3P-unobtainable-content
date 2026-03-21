@@ -1,3 +1,4 @@
+#pragma once
 #include <CTRPluginFramework.hpp>
 #include <cmath>
 using namespace CTRPluginFramework;
@@ -5,55 +6,122 @@ using namespace CTRPluginFramework;
 struct String {
     static const std::string
 
-    // yes no
-    yes, no,
+    // yes no on off
+    yes,
+    no,
+    on,
+    off,
 
     // game names
-    dqmj3p, dqmj3,
-
-    // about
-    discordLink,
+    dqmj3p,
+    dqmj3,
 
     // main 3gx
-    _3gxTitle, _3gxNotes,
+    unobtainableContent,
+    discordLink,
+    pluginNotes,
     welcome,
     pressSelect,
-    updateCheckError, homeMenu,
-
-    // 3gx cheats
-    cheat_unobtainableContent, notes_unobtainableContent,
-    cheat_grandEstarkEventFix, notes_grandEstarkEventFix,
-    cheat_wiFiCoins, notes_wiFiCoins,
+    homeMenu,
+    cantWriteFreeMem,
+    pressBExit,
+    cheat_unobtainableContent,
+    notes_unobtainableContent,
 
     // global messagebox
-    success, warning, error,
+    success,
+    info,
+    question,
+    warning,
+    error,
 
     // invalid version messagebox
-    j3NotCompatible,
     wrongGame,
-    noUpdate,
     unusableVersion,
 
-    // cheat messagebox
+    // cheats
     all,
-    noMonster,
-    unlockedSkills, unlockedItems, unlockedTitles,
-    estarkAlreadyDone, estarkNot5Items, estarkRoryBellows, estarkFixed,
+    unlockedSkills,
+    unlockedItems,
+    unlockedTitles,
+    monstersCheatON,
+    monstersCheatONEmuWarning,
+    monstersCheatOFF,
+    howToUnlockMonsters,
+    sirloinConfirm,
+    sirloinSuccess,
+    sirloinWait,
+    sirloinError,
+    sirloinNotUnlockedAll,
+    unlockOnceAlreadyObtained1,
+    unlockOnceAlreadyObtained2,
+    itemUnlocked,
 
     // keyboard
-    chooseCategory, categoryMonsters, categorySkills, categoryItems, categoryTitles,
-    chooseMonsterUnlock, chooseSkillUnlock, chooseItemUnlock, chooseTitleUnlock,
-    coinAdd,
+    chooseOption,
+    chooseCategory,
+    categoryMonsters,
+    categorySkills,
+    categoryItems,
+    categoryTitles,
+    chooseMonster,
+    chooseSkillUnlock,
+    chooseItemUnlock,
+    chooseTitleUnlock,
+    unlockMethods,
 
-    // basic unlock methods
+    // unlock methods
     downloadableDisk,
-    starterTrade, j3Transfer,
-    streetPass, spotPass,
-    // unlockFluffy, unlockScruffy,
-    unlockRobbinLadies,
-
-    // coin names
-    bronzeCoin, silverCoin, goldCoin, platinumCoin,
+    starterTrade,
+    j3Transfer,
+    streetPass,
+    spotPass,
+    spotPassDisk,
+    spotpassBook,
+    streetPass50Battles,
+    wildcardLeonyx,
+    unlockKingSP,
+    unlockDemonkingSP,
+    eastStationJ3,
+    westStationJ3,
+    eastStationJ3P,
+    westStationJ3P,
+    unlockSirloin,
+    transferTicket,
+    terryStatue,
+    mireilleStatue,
+    iruStatue,
+    lucaStatue,
+    wifiBattle1,
+    wifiBattle10,
+    wifiBattle100,
+    wifiPts10,
+    wifiPts500,
+    wifiPts1000,
+    wifiPts4000,
+    wifiPts5000,
+    wifiPts9999,
+    meetStreetpass10,
+    meetStreetpass100,
+    meetStreetpass1000,
+    winStreetpass10,
+    winStreetpass100,
+    winStreetpass1000,
+    mgpPlay,
+    mgp10000,
+    mgp1000,
+    mgp100,
+    mgp8,
+    mgp1,
+    cgpPlay,
+    cgp10000,
+    cgp1000,
+    cgp100,
+    cgp8,
+    cgp1,
+    commu1,
+    commu2,
+    commu3,
 
     empty;
 
@@ -62,12 +130,12 @@ struct String {
         return (value == 0 || value == 1) ? "" : "s";
     }
 
-    static inline std::string gradiant(const std::string& text, Color from, Color to, float firstColWeight = 0.5f) {
+    static inline std::string gradient(const std::string& text, Color from, Color to, float power = 0.5f) {
         std::vector<Color> cols;
         
-        for (size_t i = 0; i < text.length(); i++) {
+        for (int i = 0; i < text.length(); i++) {
             float ratio = (text.length() == 1) ? 0.0f : float(i) / (text.length() - 1),
-                  weightRatio = pow(ratio, std::log(0.5f) / std::log(firstColWeight));
+                  weightRatio = pow(ratio, std::log(0.5f) / std::log(power));
 
             u8 r = from.r + (to.r - from.r) * weightRatio,
                g = from.g + (to.g - from.g) * weightRatio,
@@ -77,7 +145,7 @@ struct String {
         }
 
         std::string newText = "";
-        for (size_t i = 0; i < text.length(); i++) {
+        for (int i = 0; i < text.length(); i++) {
             newText += cols[i];
             newText += text.substr(i, 1);
         }
@@ -87,5 +155,10 @@ struct String {
 
     static inline std::string bold(const std::string& text) {
         return ToggleDrawMode(Render::BOLD) << text << ToggleDrawMode(Render::BOLD);
+    }
+
+    static inline int centerSysFont(const std::string& text, int startX, int width) {
+        const int fontWidth = OSD::GetTextWidth(true, text);
+        return (int)(width / 2 - fontWidth / 2 + startX);
     }
 };

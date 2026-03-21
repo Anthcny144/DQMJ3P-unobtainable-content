@@ -7,99 +7,128 @@
 #include <unordered_map>
 using namespace CTRPluginFramework;
 
-bool GameTitle::isJ3() {
-    return Process::GetTitleID() == Macro::TITLEID_J3;
-}
+VersionBits GameTitle::versionBits = VersionBits::NONE;
+bool GameTitle::_isUpdate = false;
 
-bool GameTitle::isJ3P() {
-    return Process::GetTitleID() == Macro::TITLEID_J3P;
-}
+bool GameTitle::init() {
+    // check if valid game
+    if (!GameTitle::isJ3() && !GameTitle::isJ3P()) {
+        MessageBoxPlus::wrap(String::error, String::wrongGame);
+        Process::ReturnToHomeMenu();
+        return false;
+    }
 
-GameTitle::CheckUpdate GameTitle::isUpdate13() {
+    // determine if update is installed
     u32 count = 0;
     FS_MediaType media = MEDIATYPE_SD;
 
     // get title count
-    if (AM_GetTitleCount(media, &count) != 0)
-        return GameTitle::CheckUpdate::GET_TITLE_COUNT_ERROR;
+    if (AM_GetTitleCount(media, &count) == 0) {
+        // free space to store titleIds
+        u64* titleIDs = (u64*)Macro::FREE_RAM_SPACE_ADDR;
 
-    // free space to store titleIds
-    u64* titleIDs = (u64*)Macro::FREE_RAM_SPACE_ADDR;
+        // get list of installed titles
+        u32 actualCount = 0;
+        if (AM_GetTitleList(&actualCount, media, count, titleIDs) == 0) {
 
-    // get list of installed titles
-    u32 actualCount = 0;
-    if (AM_GetTitleList(&actualCount, media, count, titleIDs) != 0)
-        return GameTitle::CheckUpdate::GET_TITLE_COUNT_ERROR;
+            // search update title in list
+            for (int i = 0; i < actualCount; i++)
+                if (titleIDs[i] == static_cast<u64>(GameTitle::isJ3P() ? TitleID::J3P_UPD : TitleID::J3_UPD))
+                    _isUpdate = true;
+        }
+    }
 
-    // search update title in list
-    for (size_t i = 0; i < actualCount; i++)
-        if (titleIDs[i] == Macro::TITLEID_J3P_UPDATE)
-            return GameTitle::CheckUpdate::SUCCESS;
+    // check game version (by picking random RAM addresses and reading their value)
+    bool validVersion = GameTitle::isValidVersion();
 
-    return GameTitle::CheckUpdate::NOT_FOUND;
+    if (!validVersion) {
+        if (!MessageBoxPlus::wrap(String::warning, String::unusableVersion, DialogType::DialogYesNo)) {
+            MessageBoxPlus::wrap(String::warning, String::homeMenu);
+            Process::ReturnToHomeMenu();
+            return false;
+        }
+    }
 
-    // return Process::GetVersion() == 3300; // doesn't seem to work properly
+    // get version bits
+    if (GameTitle::isJ3()) {
+        if (GameTitle::isUpdate())
+            versionBits = VersionBits::J3_UPD;
+        else
+            versionBits = VersionBits::J3;
+    }
+
+    else if (GameTitle::isJ3P()) {
+        if (GameTitle::isUpdate())
+            versionBits = VersionBits::J3P_UPD;
+        else
+            versionBits = VersionBits::J3P;
+    }
+
+    return true;
 }
 
-GameTitle::CheckVersion GameTitle::isValidVersion() {
-    // reading random ARM values to check if the base game is the same
-    static const std::unordered_map<u32, u32> checks = {
-        {0x144144, 0xE3E02000},
-        {0x242424, 0xE1510003},
-        {0x321144, 0xE3A01002},
-        {0x550088, 0xE1A00007}
-    };
+bool GameTitle::isJ3() {
+    return Process::GetTitleID() == static_cast<u64>(TitleID::J3);
+}
+
+bool GameTitle::isJ3P() {
+    return Process::GetTitleID() == static_cast<u64>(TitleID::J3P);
+}
+
+bool GameTitle::isUpdate() {
+    return _isUpdate;
+}
+
+bool GameTitle::isValidVersion() {
+    // read random ARM values to check if the base game is the same
+    std::unordered_map<Addr, u32> checks;
+    
+    // J3 1.0
+    if (!GameTitle::isJ3P() && !GameTitle::isUpdate()) {
+        checks = {
+            {0x144144, 0xEB06EACD},
+            {0x242424, 0x68},
+            {0x321144, 0xE3500000},
+            {0x550088, 0xE58DA020}
+        };
+    }
+
+    // J3 1.1
+    if (!GameTitle::isJ3P() && GameTitle::isUpdate()) {
+        checks = {
+            {0x144144, 0xE1A03009},
+            {0x242424, 0xE3500000},
+            {0x321144, 0x8247FF},
+            {0x550088, 0xE59F20C8}
+        };
+    }
+
+    // J3P 1.0
+    if (GameTitle::isJ3P() && !GameTitle::isUpdate()) {
+        checks = {
+            {0x144144, 0xE3C00003},
+            {0x242424, 0xE5957018},
+            {0x321144, 0xE5984018},
+            {0x550088, 0xEDD70A01}
+        };
+    }
+
+    // J3P 1.3
+    if (GameTitle::isJ3P() && GameTitle::isUpdate()) {
+        checks = {
+            {0x144144, 0xE3E02000},
+            {0x242424, 0xE1510003},
+            {0x321144, 0xE3A01002},
+            {0x550088, 0xE1A00007}
+        };
+    }
 
     u32 read;
     for (const auto& [addr, val] : checks) {
         Process::Read32(addr, read);
 
         if (read != val)
-            return GameTitle::CheckVersion::INVALID;
-    }
-
-    return GameTitle::CheckVersion::VALID;
-}
-
-bool GameTitle::check() {
-    if (GameTitle::isJ3()) {
-        MessageBoxPlus::wrap(String::error, String::j3NotCompatible);
-        return false;
-    }
-
-    if (!GameTitle::isJ3P()) {
-        MessageBoxPlus::wrap(String::error, String::wrongGame);
-        return false;
-    }
-
-    // check 1.3 update
-    GameTitle::CheckUpdate updateRes = GameTitle::isUpdate13();
-    // updateRes = GameTitle::CheckUpdate::GET_TITLE_LIST_ERROR; // simulate error
-
-    if (updateRes == GameTitle::CheckUpdate::NOT_FOUND) {
-        MessageBoxPlus::wrap(String::error, String::noUpdate);
-        return false;
-    }
-    else if (updateRes == GameTitle::CheckUpdate::GET_TITLE_COUNT_ERROR || updateRes == GameTitle::CheckUpdate::GET_TITLE_LIST_ERROR) {
-        std::string version = std::to_string(Process::GetVersion());
-
-        if (!MessageBoxPlus::wrap(String::warning << Color::Silver << " (" << version << ")", String::updateCheckError, DialogType::DialogYesNo)) {
-            MessageBoxPlus::wrap(String::warning, String::homeMenu);
-            Process::ReturnToHomeMenu();
             return false;
-        }
-    }
-
-    // check game version (by picking random RAM addresses and reading their value)
-    GameTitle::CheckVersion versionRes = GameTitle::isValidVersion();
-    // versionRes = GameTitle::CheckVersion::INVALID; // simulate error
-
-    if (versionRes == GameTitle::CheckVersion::INVALID) {
-        if (!MessageBoxPlus::wrap(String::warning, String::unusableVersion, DialogType::DialogYesNo)) {
-            MessageBoxPlus::wrap(String::warning, String::homeMenu);
-            Process::ReturnToHomeMenu();
-            return false;
-        }
     }
 
     return true;
