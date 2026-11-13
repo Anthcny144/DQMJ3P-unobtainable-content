@@ -44,11 +44,11 @@ struct Monster : public Content {
         ULTRA = 0x4A
     };
 
-    const std::string iconName;
+    const u32 iconIdx;
     const u32 checksum;
 
     Monster(const std::string& name,
-            const std::string& iconName,
+            u32 iconIdx,
             Gradient gradient,
             u16 id,
             const std::string& unlockMethod,
@@ -56,6 +56,7 @@ struct Monster : public Content {
             VersionBits version
     );
 
+    CustomIcon getIcon(std::vector<CustomIcon::Pixel>& iconsPixels);
     static std::vector<Monster>& getList();
 };
 

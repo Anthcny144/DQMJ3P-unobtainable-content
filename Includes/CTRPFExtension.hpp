@@ -16,24 +16,17 @@ struct ProcessPlus {
     static inline bool WriteFreeMem(T value, bool align = true) {
         static_assert(std::is_integral_v<T>, "ProcessPlus::WriteFreeMem can only write integer values");
 
-        static bool full = false;
-
-        // align
+        // Align
         if (align)
             _addr = (_addr + sizeof(T) - 1) & ~(sizeof(T) - 1);
 
-        // if no free space
-        if (_addr + sizeof(T) > Macro::FREE_RAM_SPACE_ADDR + Macro::FREE_RAM_SPACE_SIZE) {
-            if (!full) {
-                OSD::Notify(Color::Red << "ERROR: " << Color::Silver << "CTRPF free mem is full!");
-                full = true;
-            }
+        // If no free space
+        if (_addr + sizeof(T) > Macro::FREE_RAM_SPACE_ADDR + Macro::FREE_RAM_SPACE_SIZE)
             return false;
-        }
 
         bool res;
 
-        // write
+        // Write
         if constexpr (sizeof(T) == 1)
             res = Process::Write8(_addr, value);
         else if constexpr (sizeof(T) == 2)
@@ -48,13 +41,14 @@ struct ProcessPlus {
     }
 
     static void ClearFreeMem();
-    static void WriteHook(const std::vector<u32>& instructions, std::initializer_list<ARM::AddrType> types);
-    static Addr GetHookAddr(ARM::AddrType type);
+    static void WriteHook(const std::vector<u32>& instructions, std::initializer_list<ARM::HookType> types);
+    static Addr GetHookAddr(ARM::HookType type);
     static Addr GetNextFreeAddr();
+    static void Exit();
 
     private:
     static Addr _addr;
-    static std::unordered_map<ARM::AddrType, Addr> _hookAddrs;
+    static std::unordered_map<ARM::HookType, Addr> _hookAddrs;
 };
 
 struct MessageBoxPlus {
@@ -62,14 +56,15 @@ struct MessageBoxPlus {
 };
 
 struct CustomIconPlus {
-    static const u32 size = 30;
+    static const u32 size;
 
-    static CustomIcon loadIcon(const std::string& path);
+    static CustomIcon loadIcon(std::vector<CustomIcon::Pixel>& iconsPixels, u32 iconIndex);
     static void draw(const Screen& screen, CustomIcon& icon, int drawX, int drawY, unsigned int scale = 1);
 };
 
 namespace ColorPlus {
     static const Color Pink = Color(0xFF84EBFF);
+    static const Color None = Color(0, 0, 0, 0);
 };
 
 struct Gradient {

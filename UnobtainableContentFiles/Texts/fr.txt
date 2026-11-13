@@ -1,0 +1,236 @@
+# Monstres
+MONSTER_01=Multicoloeuf
+MONSTER_02=Gluant Premium
+MONSTER_03=Minislurps
+MONSTER_04=Slurpgirl
+MONSTER_05=Superslurp
+MONSTER_06=Nemeslurp
+MONSTER_07=Roi médigluant
+MONSTER_08=Gomé
+MONSTER_09=Dipmensaur
+MONSTER_10=Allusion
+MONSTER_11=Renhé
+MONSTER_12=Mégapode
+MONSTER_13=Fild du Diable
+MONSTER_14=Héros d'Alefga
+MONSTER_15=Héros d'Aliaha
+MONSTER_16=Héros Zenithie
+MONSTER_17=Héros Trodiens
+MONSTER_18=Mékanotimbré
+MONSTER_19=Sagitaure
+MONSTER_20=Terminal Q484
+MONSTER_21=Atoupik
+MONSTER_22=As de pique
+MONSTER_23=JOKER
+MONSTER_24=Disciple de Zoma
+MONSTER_25=Starky
+MONSTER_26=Tuki
+MONSTER_27=Kukuri
+MONSTER_28=Numen
+MONSTER_29=Lionyx
+MONSTER_30=Lionyxeau
+MONSTER_31=Nochora Z d'or
+MONSTER_32=Nochora Z de platine
+MONSTER_33=Turboregi
+MONSTER_34=Aeroregi
+MONSTER_35=Subnauregi
+MONSTER_36=Vladd
+MONSTER_37=Les Sept Chaperons
+MONSTER_38=Chaperonne
+MONSTER_39=Lucius
+MONSTER_40=Veera
+MONSTER_41=Mad Mortex
+MONSTER_42=Aldalaa
+
+# Compétences
+SKILL_01=Roi SP
+SKILL_02=Roi-démon SP
+SKILL_03=DQ 30eme SP
+SKILL_04=Grand Est
+SKILL_05=Ouest Merveilleux
+SKILL_06=Slurpgirl orientale
+SKILL_07=Slurpgirl occidentale
+SKILL_01_BOOK=Livre de Roi SP
+SKILL_02_BOOK=Livre de Roi-démon SP
+SKILL_03_BOOK=Livre de DQ 30eme SP
+SKILL_04_BOOK=Livre de Grand Est
+SKILL_05_BOOK=Livre d'Ouest Merveilleux
+SKILL_06_BOOK=Livre de Slurpgirl orientale
+SKILL_07_BOOK=Livre de Slurpgirl occidentale
+
+# Objets
+ITEM_01=Bon de steak
+ITEM_02=Ticket d'accessoire
+ITEM_03=Livre d'images Doudouleur I
+ITEM_04=Livre d'images Doudouleur II
+ITEM_05=Livre d'images Warubou I
+ITEM_06=Livre d'images Warubou II
+
+# Titres
+TITLE_01=Débutant du réseau
+TITLE_02=Maître du réseau
+TITLE_03=Champion du réseau
+TITLE_04=Guerrier des étoiles
+TITLE_05=Guerrier de l'étoile Nova
+TITLE_06=Guerrirer galactique
+TITLE_07=Grand guerrier de la galaxie
+TITLE_08=Guerrier universel
+TITLE_09=Guerrier cosmique
+TITLE_10=Débutant des contacts
+TITLE_11=Vétéran des contacts
+TITLE_12=Élite des contacts
+TITLE_13=Débutant de la victoire
+TITLE_14=Vétéran de la victoire
+TITLE_15=Élite de la victoire
+TITLE_16=Entrée GPM
+TITLE_17=Top 10K GPM
+TITLE_18=Top 1K GPM
+TITLE_19=Top 100 GPM
+TITLE_20=Top 8 GPM
+TITLE_21=Champion GPM
+TITLE_22=Entrée GPC
+TITLE_23=Top 10K GPC
+TITLE_24=Top 1K GPC
+TITLE_25=Top 100 GPC
+TITLE_26=Top 8 GPC
+TITLE_27=Champion GPC
+TITLE_28=Propiétaire débutant
+TITLE_29=Propriétaire Vétéran
+TITLE_30=Élite des propriétaires
+
+# Utilisés par les autres textes
+HELPER_MONSTER_LEONYX=Lionyx
+HELPER_MONSTER_WILDCARD=JOKER
+HELPER_MONSTER_RUGIUS=Lucius
+HELPER_MONSTER_WULFSPADE_ACE=Atoupik
+HELPER_MONSTER_ACE_OF_SPADES=As de pique
+HELPER_MONSTER_KING_HEALSLIME=Roi médigluant
+HELPER_MONSTER_SLIDER_GIRL=Slurpgirl
+
+# 3GX autres
+PLUGIN_NAME=Contenu inaccessible
+PLUGIN_READY=Plugin ready !
+PLUGIN_DESC=Un plugin de triche pour obtenir le contenu bloqué {0}derrière les fonctionnalités en ligne, StreetPass, SpotPass et d'échange.\nPermet de compléter le jeu à 100% malgré la fermeture du mode en ligne !\n\nPlugin créé par {1}\nSi vous rencontrez un quelconque problème, reportez-le sur le serveur Discord DQMJ3P :\n{2}
+PLUGIN_B_TO_EXIT=\uE001 pour quitter
+PLUGIN_WRONG_GAME={0} est un plugin pour\n{1} et {2} !
+PLUGIN_UNUSABLE_VERSION=Il semblerait que vous utilisez une version modifiée du jeu qui n'est pas exploitable par le plugin.\nVeuillez utiliser la version du jeu fournie dans le serveur Discord :\n{0}
+PLUGIN_PRESS_SELECT=Appuyez sur Select pour ouvrir le menu !
+PLUGIN_FREE_MEM_FULL=La mémoire libre de CTRPF est remplie !
+PLUGIN_LANGUAGE_SWITCHED=Relancez le jeu pour appliquer la nouvelle langue.
+
+# MessageBox
+MSGBOX_SUCCESS=Succès
+MSGBOX_INFO=Information
+MSGBOX_QUESTION=Question
+MSGBOX_WARNING=Attention
+MSGBOX_ERROR=Erreur
+
+# Entrées des cheats
+CHEAT_UNOBTAINABLE_CONTENT_NAME=Contenu inaccessible
+CHEAT_UNOBTAINABLE_CONTENT_DESC=Choissiez le contenu à débloquer.\n\n{0}NOTES : Pour les monstres, activez d'abord le cheat. Ensuite, allez ç la place Wi-Fi et parlez au vendeur tout à droite. Si le cheat est actif, il ne porposera que les monstres inobtenables. Vous pourrez les acheter même si vous ne possédez pas assez de Pièces Wi-Fi !
+CHEAT_WIFI_COINS_NAME=Pièces Wi-Fi
+CHEAT_WIFI_COINS_DESC=Donnez-vous une quantité désirée de Pièces Wi-Fi.
+CHEAT_SWITCH_LANGUAGE_NAME=Changer la langue
+CHEAT_SWITCH_LANGUAGE_DESC=Changez la langue du plugin.
+
+# Menu claviers
+KB_OPTION=\nChoisissez une option !
+KB_CATEGORY=\nChoisissez une catégorie !
+KB_MONSTERS=Monstres
+KB_SKILLS=Compétences
+KB_ITEMS=Objets
+KB_TITLES=Titres
+KB_CHOOSE_MONSTER=\nChoisissez un monstre !
+KB_CHOOSE_SKILL=\nChoisissez une compétence à débloquer !
+KB_CHOOSE_ITEM=\nChoisissez un objet à débloquer !
+KB_CHOOSE_TITLE=\nChoisissez un titre à débloquer !
+KB_UNLOCK_METHODS=Méthodes d'obtention
+KB_COINS_GET=\nChoisissez les pièces à obtenir !
+KB_COINS_AMOUNT=\nEntrez la quantité de {0} :
+
+# Menu choix
+CHOICE_YES=Oui
+CHOICE_NO=Non
+CHOICE_ALL=[TOUT]
+CHOICE_MONSTERS_ON=ON [ー●]
+CHOICE_MONSTERS_OFF=OFF [●ー]
+
+# Menu popups
+POPUP_MONSTERS_ON=Le cheat est actif !\nPour débloquer les monstres, parlez au vendeur le plus à droite à la place Wi-Fi. Vous poueez acheter les monstres non-obtenables même si vous n'avez pas assez de Pièces Wi-Fi.
+POPUP_MONSTERS_OFF=Le cheat est désactivé.\nLe comportement original du jeu a été restauré.
+POPUP_MONSTERS_HOW_TO_UNOCK=Pour débloquer les monstres, allez à la place Wi-Fi et parlez au vendeur le plus à droite pour échanger vos Pièces Wi-Fi contre des monstres !\nLe cheat vous permet d'en acheter même si vous n'avez pas assez de pièces !\n\nAssurez-vous d'activer le cheat avant de parler au vendeur.
+POPUP_UNLOCK_SKILL_ALL={0} compétence(s) ont été débloqués et un exemplaire de leur livre a été ajouté dans votre inventaire !
+POPUP_UNLOCK_SKILL_SINGLE_BOOK={0} a été débloqué et 1x {1} a été ajouté dans votre inventaire !
+POPUP_UNLOCK_SKILL_SINGLE_BOOK_ONLY=1x {0} a été ajouté dans votre inventaire !
+POPUP_UNLOCK_ITEM_ALL={0} objet(s) ont été débloqués et ajoutés dans votre inventaire !
+POPUP_UNLOCK_ITEM_SINGLE={0} a été débloqué et ajouté dans votre inventaire !
+POPUP_UNLOCK_ONCE_ALREADY_UNLOCKED=Vous avez déjà débloqué le {0} !\nCet objet ne peut être obtenu qu'en un seul exemplaire.
+POPUP_UNLOCK_TITLE_ALL={0} titre(s) ont été débloqués !
+POPUP_UNLOCK_TITLE_SINGLE=Le titre {0} a été débloqué !
+POPUP_UNLOCK_TITLE_SINGLE_ALREADY_UNLOCKED=Vous avez déjà débloqué le titre {0}.
+
+# Méthodes de déblocage
+METHOD_HOW=Comment débloquer {0} 
+METHOD_IS_UNLOCKED=Débloqué ?
+METHOD_IN_STORAGE=Au stockage ?
+METHOD_DISK=Disque téléchargeable à la place Wi-Fi.
+METHOD_STARTER=- Échange avec un autre joueur\n- Dressable en combat StreetPass
+METHOD_J3_TRANSFER=Utilisez le transfert de monstre après l'avoir\nobtenu dans DQMJ3.
+METHOD_STREETPASS=Distributions StreetPass SQEX.
+METHOD_SPOTPASS=Distribution SpotPass, apparaît dans le\nCiel du Monde Brisé.
+METHOD_SPOTPASS_DISK={0} : Distribution SpotPass, apparaît dans le\nCiel du Monde Brisé.\n{1} : {2}
+METHOD_SPOTPASS_BOOK=Tenu par les monstres de distributions SpotPass\ndans le Ciel du Monde Brisé.
+METHOD_STREETPASS_50=Gagnez 50 StreetPass battles.
+METHOD_WILDCARD_LEONYX=Chaque 100 victoire StreetPass\nvous donne {0} ou {1}.
+METHOD_KING_SP={0} : Tenu par {1} (disque téléchargeable).\n{2} : Tenu par {3} (disque téléchargeable).
+METHOD_DEMONKING_SP=Tenu {0} (disque téléchargeable).
+METHOD_EAST_STATION_J3=Obtenable depuis une station Nintendo 3DS\njaponaise à l'Est depuis DQMJ3 : un\n{0} était distribué avec\ncette compétence.
+METHOD_WEST_STATION_J3=Obtenable depuis une station Nintendo 3DS\njaponaise à l'Ouest depuis DQMJ3 : un\n{0} était distribué avec\ncette compétence.
+METHOD_EAST_STATION_J3P=Obtenable depuis une station Nintendo 3DS\njaponaise à l'Est : un {0} était distribué avec\ncette compétence.
+METHOD_WEST_STATION_J3P=Obtenable depuis une station Nintendo 3DS\njaponaise à l'Ouest : un {0} était distribué avec\ncette compétence.
+METHOD_SIRLOIN=Saissez ce code cadeau :\n」ちョＵ使Ｍｏ不ｒＥ憎火鬼花エ剣
+METHOD_TICKET=Utilisez le transfert de monstre depuis DQMJ3 puis\ninspectez la machine au Parc du Bois\nderrière l'Affromage jaune.
+METHOD_STATUE_TERRY=Utilisez 30 tikets CGM / CGP puis parlez à la\nstatue de Terry ç la place Wi-Fi.
+METHOD_STATUE_MILLY=Gagnez 30 combats Wi-Fipuis parlez à la\nstatue de Milly à la place Wi-Fi.
+METHOD_STATUE_TARA=Dépensez au moins 30 Pièces Wi-Fi en Or et\nPlatine puis parlez à la statue d'Tara à la\nplace Wi-Fi.
+METHOD_STATUE_COBI=Gagnez 30 combats StreetPass puis parlez à la\nstatue de Cobi à la place Wi-Fi.
+METHOD_WIFI_BATTLE_1=Jouez 1 combat Wi-Fi.
+METHOD_WIFI_BATTLE_10=Jouez 10 combats Wi-Fi.
+METHOD_WIFI_BATTLE_100=Jouez 100 combats Wi-Fi.
+METHOD_WIFI_PTS_10=Accumulez 10 points Wi-Fi.
+METHOD_WIFI_PTS_500=Accumulez 500 points Wi-Fi.
+METHOD_WIFI_PTS_1000=Accumulez 1000 points Wi-Fi.
+METHOD_WIFI_PTS_4000=Accumulez 4000 points Wi-Fi.
+METHOD_WIFI_PTS_5000=Accumulez 5000 points Wi-Fi.
+METHOD_WIFI_PTS_9999=Accumulez 9999 points Wi-Fi.
+METHOD_STREETPASS_MEET_10=Rencontrez 10 personnes via StreetPass.
+METHOD_STREETPASS_MEET_100=Rencontrez 100 personnes via StreetPass.
+METHOD_STREETPASS_MEET_1000=Rencontrez 1000 personnes via StreetPass.
+METHOD_STREETPASS_WIN_10=Gagnez 10 combats StreetPass.
+METHOD_STREETPASS_WIN_100=Gagnez 100 combats StreetPass.
+METHOD_STREETPASS_WIN_1000=Gagnez 1000 combats StreetPass.
+METHOD_MGP_PLAY=Participez au GP des Maîtres.
+METHOD_MGP_10000=Qualifiez-vous dans le top 10000 au\nGP des Maîtres.
+METHOD_MGP_1000=Qualifiez-vous dans le top 1000 au\nGP des Maîtres.
+METHOD_MGP_100=Qualifiez-vous dans le top 100 au\nGP des Maîtres.
+METHOD_MGP_8=Qualifiez-vous dans le top 8 au\nGP des Maîtres.
+METHOD_MGP_1=Qualifiez-vous à la première place au\nGP des Maîtres.
+METHOD_CGP_PLAY=Participez au GP des Challengers.
+METHOD_CGP_10000=Qualifiez-vous dans le top 10000 au\nGP des Challengers.
+METHOD_CGP_1000=Qualifiez-vous dans le top 1000 au\nGP des Challengers.
+METHOD_CGP_100=Qualifiez-vous dans le top 100 au\nGP des Challengers.
+METHOD_CGP_8=Qualifiez-vous dans le top 8 au\nGP des Challengers.
+METHOD_CGP_1=Qualifiez-vous à la première place au\nGP des Challengers.
+METHOD_COMMUNITY_1=Créez une communauté Wi-Fi avec\n5 matches joués.
+METHOD_COMMUNITY_2=Créez une communauté Wi-Fi avec\n10 joueurs ou plus et avec 50 matches joués.
+METHOD_COMMUNITY_3=Créez une communauté Wi-Fi avec\n100 joueurs ou plus et avec 500 matches joués.
+
+# Pièces
+COIN_BRONZE=Pièces de Bronze
+COIN_SILVER=Pièces de Argent
+COIN_GOLD=Pièces d'Or
+COIN_PLATINUM=Pièces de Platine
+
+# Autres
+ICONS_BIN_NOT_LOADED=Les icônes du plugin n'ont pas pu être chargées.\nVeuillez réinstaller le plugin.
+MONSTER_CHECKSUM_SLOT_COUNT_EXEEDED=Nombre max de slot de checksum dépassé.\n\nVeuillez exporter votre sauvegarde et reporter cette erreur sur le serveur Discord :\n{0}

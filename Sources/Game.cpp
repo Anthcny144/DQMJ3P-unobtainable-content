@@ -5,14 +5,6 @@
 #include <vector>
 using namespace CTRPluginFramework;
 
-bool Game::isLoaded() {
-    u32 val;
-    Process::Read32(ARM::getAddr(ARM::AddrType::SAVE), val);
-    Process::Read32(val, val);
-
-    return val != 0;
-}
-
 bool Game::unlock(u32 offset, u16 id) {
     Addr addr;
     if (!PTR::getSave(addr))

@@ -2,7 +2,7 @@
 #include <CTRPluginFramework.hpp>
 #include "Content.hpp"
 #include "Game.hpp"
-#include "String.hpp"
+#include "Text.hpp"
 #include <sstream>
 using namespace CTRPluginFramework;
 
@@ -48,9 +48,11 @@ struct KBMessageParts {
 };
 
 struct Cheat {
-    static void init();
+    static void init(std::vector<CustomIcon::Pixel>& iconsPixels, std::vector<CustomIcon>& flagIcons);
 
     static void unobtainableContent(MenuEntry* entry);
+    static void wiFiCoins(MenuEntry* entry);
+    static void switchLanguage(MenuEntry* entry);
 
     static KBChoice giveMonster(Keyboard& kb, int selectedIdx, const std::string& message);
     static bool monstersMenu();
@@ -61,6 +63,7 @@ struct Cheat {
     static void cottneyRottneyAlbums(Item* item);
 
     static bool isMonsterInStorage(u16 monsterId);
+    static u32 setWiFiCoinsAmount(u8 coinIdx, u16 targetAmount);
     
     static std::vector<CustomIcon> monsterIcons, coinIcons;
     static std::vector<Monster> monsters;
@@ -68,9 +71,10 @@ struct Cheat {
     static std::vector<Item> items;
     static std::vector<Title> titles;
     static std::vector<std::string> skillNames, itemNames, titleNames;
+    static std::vector<CustomIcon> flagIcons;
 
     private:
-    static void _writeMonsterChecksums();
+    static bool _writeMonsterChecksums();
     static Addr _monstersCanBuyAddr;
     
     friend class KBCallback;
@@ -106,21 +110,24 @@ struct KBCallback {
         std::string temp;
         std::stringstream stream(thing.unlockMethod);
 
-        how.push_back("How to unlock " << String::bold(thing.colorName) << Color::Silver << ":");
+        how.push_back(Text::get("METHOD_HOW", ColorPlus::None, Color::White, {Text::bold(thing.colorName)}) << ":");
         while (std::getline(stream, temp, '\n'))
             how.push_back(Color::Silver << temp);
 
-        unlocked = Color::White << "Unlocked? " << (isUnlocked ? String::yes : String::no);
+        std::string unlockedYesNo = Text::bold(Text::get(isUnlocked ? "CHOICE_YES" : "CHOICE_NO"));
+        Color unlockedColor = isUnlocked ? Color::Lime : Color::Red;
+        unlocked = Text::get("METHOD_IS_UNLOCKED", Color::White, unlockedColor) << " " << unlockedYesNo;
         
         if constexpr (std::is_same_v<T, Monster>) {
             bool inStorage = Cheat::isMonsterInStorage(thing.id);
-            storage = Color::White << "In storage? " << (inStorage ? String::yes : String::no);
+            std::string inStorageYesNo = Text::bold(Text::get(inStorage ? "CHOICE_YES" : "CHOICE_NO"));
+            Color inStorageColor = inStorage ? Color::Lime : Color::Red;
+            storage = Text::get("METHOD_IN_STORAGE", Color::White, inStorageColor) << " " << inStorageYesNo;
         }
 
         return KBMessageParts(title, how, unlocked, storage);
     }
 
-    static void unobtainableContent_monsters_cb(Keyboard& kb, KeyboardEvent& event);
     static void unobtainableContent_skill_cb(Keyboard& kb, KeyboardEvent& event);
     static void unobtainableContent_items_cb(Keyboard& kb, KeyboardEvent& event);
     static void unobtainableContent_titles_cb(Keyboard& kb, KeyboardEvent& event);

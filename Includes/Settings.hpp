@@ -3,20 +3,16 @@
 #include <unordered_map>
 using namespace CTRPluginFramework;
 
-class Settings {
-    std::string path;
-    std::unordered_map<std::string, std::string> data;
+struct Settings {
+    static void init(const std::string& path);
+    static bool has(const std::string& key);
+    static std::string get(const std::string& key);
+    static void set(const std::string& key, const std::string& value, bool save);
+    static void save();
 
-    void initData(File& file);
+    private:
+    static void _initData(File& file);
 
-    public:
-    Settings();
-    Settings(const std::string& path);
-    bool isValid = false;
-
-    bool open(const std::string& path);
-    bool has(const std::string& key);
-    std::string get(const std::string& key);
-    void set(const std::string& key, const std::string& value, bool save);
-    void save();
+    static std::string _path;
+    static std::unordered_map<std::string, std::string> _data;
 };

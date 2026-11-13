@@ -4,71 +4,71 @@
 #include <utility>
 using namespace CTRPluginFramework;
 
-u32 ARM::UNDEF = 0xDEADCAFE;
+const u32 ARM::UNDEF = 0xDEADCAFE;
 
-const std::vector<ARM::ARMData> ARM::data = {
+const std::vector<std::array<u32, 4>> ARM::_addrs = {
+    // POINTERS
+    {0x107F58, 0x107F58, 0x107FB4, 0x107FB8},
+
     // SAVE
-    ARMData{
-        {0x10531C, 0x10531C, 0x10532C, 0x10532C},
-        {0x7E59A8, 0x7E69B0, 0x8957F0, 0x897804}
-    },
+    // {0x10531C, 0x10531C, 0x10532C, 0x10532C},
 
-    // HOOK_MONSTERS_CAN_BUY_SHOW
-    ARMData{
-        {0x3DC388, 0x3DCEE0, 0x445F60, 0x44706C},
-        {0xEB6A9328, 0xEB6A9052, 0xEB68EC32, 0xEB68E7EF}
-    },
+    // {0x20D358, 0x20DAAC, 0x6B0E1C, 0x6B2AC8}, // ANTICHEAT1 ->> UNSURE J3P & J3P_UPD
+    // {0x20D51C, 0x20DC70, 0x22916C, 0x22999C}, // ANTICHEAT2
+    // {0x230A98, 0x2312F4, 0x660928, 0x662534}, // ANTICHEAT3
+    // {0, 0x2311C8, 0, 0x250294}, // ANTICHEAT4
+    // {0, 0, 0, 0x2503E0}, // ANTICHEAT5
+    // {0, 0, 0, 0x250814}, // ANTICHEAT6
+};
 
-    // HOOK_MONSTERS_CAN_BUY_FAMILIES
-    ARMData{
-        {0x33FB60, 0x3406C4, 0X397F78, 0x398FC4},
-        {0xEB6D0532, 0xEB6D0259, 0xEB6BA42C, 0xEB6BA019}
-    },
+const std::vector<std::array<u32, 4>> ARM::_gameHooks = {
+    // MONSTERS_CAN_BUY_SHOW
+    {0x3DC388, 0x3DCEE0, 0x445F60, 0x44706C},
 
-    // HOOK_MONSTERS_CAN_BUY_ORIGINAL
-    ARMData{
-        {0x616528, 0x61740C, 0x6B5E64, 0x6B7B34},
-        {0xE5900004, 0xE5900004, 0xE5900004, 0xE5900004}
-    },
+    // MONSTERS_CAN_BUY_FAMILIES
+    {0x33FB60, 0x3406C4, 0X397F78, 0x398FC4},
 
-    // HOOK_NOT_ENOUGH_WIFI_COINS
-    ARMData{
-        {0x64C320, 0x64D200, 0x6F3FA8, 0x6F5C2C},
-        {0xE1510002, 0xE1510002, 0xE1510002, 0xE1510002}
-    },
+    // MONSTERS_CAN_BUY_ORIGINAL
+    {0x616528, 0x61740C, 0x6B5E64, 0x6B7B34},
+
+    // NOT_ENOUGH_WIFI_COINS
+    {0x64C320, 0x64D200, 0x6F3FA8, 0x6F5C2C},
 
     // UNBUYABLE_MONSTERS (PRO only)
-    ARMData{
-        {ARM::UNDEF, ARM::UNDEF, 0x2E73DC, 0x2E8140},
-        {ARM::UNDEF, ARM::UNDEF, 0xE3A00001, 0xE3A00001}
-    }
+    {ARM::UNDEF, ARM::UNDEF, 0x2E73DC, 0x2E8140}
 
-    // ARMAddr{0x20D358, 0x20DAAC, 0x6B0E1C, 0x6B2AC8}, // ANTICHEAT1 ->> UNSURE J3P & J3P_UPD
-    // ARMAddr{0x20D51C, 0x20DC70, 0x22916C, 0x22999C}, // ANTICHEAT2
-    // ARMAddr{0x230A98, 0x2312F4, 0x660928, 0x662534}, // ANTICHEAT3
-    // ARMAddr{0, 0x2311C8, 0, 0x250294}, // ANTICHEAT4
-    // ARMAddr{0, 0, 0, 0x2503E0}, // ANTICHEAT5
-    // ARMAddr{0, 0, 0, 0x250814}, // ANTICHEAT6
-    // ARMAddr{0x61652C, 0x617410, 0x6B5E68, 0x6B7B38}, // HOOK_UNLOCKS_DISPLAY
+    // UNLOCKS_DISPLAY
+    // {0x61652C, 0x617410, 0x6B5E68, 0x6B7B38}
+
+    // Makes bought monsters always valid: monster data built from the loaded checksum is always seen as valid as long as the cheat is enabled
+    // {0, 0x28AA70, 0, 0} // (0xE1A00000)
+};
+
+const std::vector<std::array<u32, 4>> ARM::_gameFuncs = {
+    // REWARD_WIFI_COINS
+    {0x1E1DF8, 0x1E212C, 0x1F4C68, 0x1F53BC},
+    
+    // GIVE_ITEM
+    {0x20D5E8, 0x20DD3C, 0x229220, 0x229A50},
+
+    // UNLOCK TITLE
+    {0x1E2944, 0x1E2C78, 0x1F5954, 0x1F60A8}
 };
 
 Addr ARM::getAddr(AddrType type) {
-    static int idx = ARM::_getDataIdx();
-    return ARM::data[static_cast<int>(type)].addr[idx];
+    return ARM::_getDataAddr<AddrType>(ARM::_addrs, type);
 }
 
-u32 ARM::getDefaultValue(AddrType type) {
-    static int idx = ARM::_getDataIdx();
-    return ARM::data[static_cast<int>(type)].value[idx];
+Addr ARM::getGameHook(HookType type) {
+    return ARM::_getDataAddr<HookType>(ARM::_gameHooks, type);
 }
 
-int ARM::_getDataIdx() {
-    bool pro = GameTitle::isJ3P();
-    return pro * 2 + (GameTitle::isUpdate() ? 1 : 0);
+Addr ARM::getGameFunc(FuncType type) {
+    return ARM::_getDataAddr<FuncType>(ARM::_gameFuncs, type);
 }
 
 u32 ARM::getBranchInstruction(Addr current, Addr dest, bool link) {
-    u32 val = ((dest - current - 8) / 4) & 0xFFFFFF; // jump offset
+    u32 val = ((dest - current - 8) / 4) & 0xFFFFFF; // Jump offset
     val += link ? 0xB000000 : 0xA000000; // b / bl
     return val + 0xE0000000;
 }
@@ -88,6 +88,7 @@ std::array<u32, 2> Offset::STORAGE_DATA = {0x2C0, 0x2F4},
                    Offset::LIB_ITEMS = {0x1ED4C, 0x1FD08},
                    Offset::LIB_TITLES = {0x1FE70, 0x20F38},
                    Offset::INVENTORY = {0x1D208, 0x1E04C},
+                   Offset::WIFI_COINS = {0x274, 0x274},
                    Offset::WIFI_STATUES_BITS = {0, 0x1EC},
                    Offset::J3_TRANSFERED_BITS = {0, 0x1CC},
                    
@@ -110,9 +111,8 @@ std::array<u32, 2> Offset::STORAGE_DATA = {0x2C0, 0x2F4},
                    Offset::MSTR_SKILL_PTS = {0x3A, 0x3A},
                    Offset::MSTR_TRAITS = {0x44, 0x44};
 
-bool PTR::getSave(Addr& outAddr) {
-    Addr addr = 0;
-    std::vector<u32> offsets = {ARM::getAddr(ARM::AddrType::SAVE), 0, 4};
+bool PTR::_reach(Addr& outAddr, Addr start, std::vector<u32>& offsets) {
+    Addr addr = start;
 
     for (u32 offset : offsets) {
         addr += offset;
@@ -123,4 +123,23 @@ bool PTR::getSave(Addr& outAddr) {
     
     outAddr = addr;
     return true;
+}
+
+bool PTR::getSave(Addr& outAddr) {
+    static std::vector<u32> offsets = {GameTitle::isJ3P() ? 0x50u : 0x4Cu, 0, 4};
+    return PTR::_reach(outAddr, ARM::getAddr(ARM::AddrType::POINTERS), offsets);
+}
+
+bool PTR::getInvManager(Addr& outAddr) {
+    Addr addr;
+    if (!PTR::getSave(addr))
+        return false;
+
+    static std::vector<u32> offsets = {GameTitle::isJ3P() ? 0x50u : 0x4Cu, 0, 0x14};
+    return PTR::_reach(outAddr, ARM::getAddr(ARM::AddrType::POINTERS), offsets);
+}
+
+bool PTR::getTitleManager(Addr& outAddr) {
+    static std::vector<u32> offsets = {0x28, 0, 4, 4, GameTitle::isJ3P() ? 0x34u : 0x30u};
+    return PTR::_reach(outAddr, ARM::getAddr(ARM::AddrType::POINTERS), offsets);
 }

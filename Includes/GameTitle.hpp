@@ -27,7 +27,7 @@ struct GameTitle {
     static bool isJ3P();
     static bool isUpdate();
     static bool isValidVersion();
-    static bool init();
+    static int init();
 
     static VersionBits versionBits;
 

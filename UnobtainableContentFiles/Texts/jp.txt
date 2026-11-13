@@ -1,0 +1,237 @@
+# モンスター
+MONSTER_01=ニジゴロン
+MONSTER_02=プレミアムスライム
+MONSTER_03=スライダーキッズ
+MONSTER_04=スライダーガール
+MONSTER_05=スライダーヒーロー
+MONSTER_06=死神スライダーク
+MONSTER_07=キングホイミスライム
+MONSTER_08=ゴメちゃん
+MONSTER_09=じげんりゅう
+MONSTER_10=神馬アルシオン
+MONSTER_11=プオーン
+MONSTER_12=メーダボード
+MONSTER_13=ベビンゴサタン
+MONSTER_14=プチットI・II
+MONSTER_15=プチットIII
+MONSTER_16=プチットIIV
+MONSTER_17=プチットVIII
+MONSTER_18=キラークリムゾン
+MONSTER_19=サージタウス
+MONSTER_20=管理端末Q484
+MONSTER_21=キングスペーディオ
+MONSTER_22=デモンスペーディオ
+MONSTER_23=JOKER
+MONSTER_24=ゾーマズデビルー
+MONSTER_25=プチターク
+MONSTER_26=ティコ
+MONSTER_27=ククリ
+MONSTER_28=神さま
+MONSTER_29=闘神レオソード
+MONSTER_30=少年レオソード
+MONSTER_31=ゴールドノチョーラZ
+MONSTER_32=プラチナノチョーラZ
+MONSTER_33=レジアクセル
+MONSTER_34=レジウィング
+MONSTER_35=レジマリン
+MONSTER_36=闇の王ヴラート
+MONSTER_37=カンダタセブン
+MONSTER_38=カンダタレディース
+MONSTER_39=魔戦士ルギウス
+MONSTER_40=魔戦士ヴェーラ
+MONSTER_41=魔王オムド・レクス
+MONSTER_42=アルダララ
+
+# スキル
+SKILL_01=王のカSP
+SKILL_02=魔王の力SP
+SKILL_03=DQ30周年SP
+SKILL_04=大いなる東の力
+SKILL_05=ふしぎな西の力
+SKILL_06=快活な東の乙女
+SKILL_07=風雅なる西の乙女
+SKILL_01_BOOK=王のカSPの証
+SKILL_02_BOOK=魔王の力SPの証
+SKILL_03_BOOK=DQ30周年SPの証
+SKILL_04_BOOK=大いなる東の力の証
+SKILL_05_BOOK=ふしぎな西の力の証
+SKILL_06_BOOK=快活な東の乙女の証
+SKILL_07_BOOK=風雅なる西の乙女の証
+
+# アイテム
+ITEM_01=超しもふりにく引換券
+ITEM_02=アクセサリーチケット
+ITEM_03=わたぼう図鑑・上巻
+ITEM_04=わたぼう図鑑・下巻
+ITEM_05=ワルぼう図鑑・上巻
+ITEM_06=ワルぼう図鑑・下巻
+
+# 称号
+TITLE_01=通信対戦のビギナー
+TITLE_02=通信対戦の達人
+TITLE_03=通信対戦の王者
+TITLE_04=星の対戦者
+TITLE_05=星々の対戦者
+TITLE_06=銀河の対戦者
+TITLE_07=大銀河の対戦者
+TITLE_08=宇宙の対戦者
+TITLE_09=大宇宙の対戦者
+TITLE_10=ふれあい公園
+TITLE_11=ふれあい祭り
+TITLE_12=ふれあい遊園地
+TITLE_13=星の守護者
+TITLE_14=銀河の守護者
+TITLE_15=宇宙の守護者
+TITLE_16=MGP参加者
+TITLE_17=MGPベスト1万
+TITLE_18=MGPベスト1000
+TITLE_19=MGPベスト100
+TITLE_20=MGPベスト8
+TITLE_21=MGPチャンピオン
+TITLE_22=CGP参加者
+TITLE_23=CGPベスト1万
+TITLE_24=CGPベスト1000
+TITLE_25=CGPベスト100
+TITLE_26=CGPベスト8
+TITLE_27=CGPチャンピオン
+TITLE_28=ナイトオブオーナー
+TITLE_29=キングオブオーナー
+TITLE_30=ゴッドオブオーナー
+
+# 他のテキストで使用されている
+HELPER_MONSTER_LEONYX=闘神レオソード
+HELPER_MONSTER_WILDCARD=JOKER
+# バグ：「魔」の文字に太字かつグラデーションを適用すると、描画上の問題が発生する。
+HELPER_MONSTER_RUGIUS=ませんしルギウス
+HELPER_MONSTER_WULFSPADE_ACE=キングスペーディオ
+HELPER_MONSTER_ACE_OF_SPADES=デモンスペーディオ
+HELPER_MONSTER_KING_HEALSLIME=キングホイミスライム
+HELPER_MONSTER_SLIDER_GIRL=スライダーガール
+
+# 3GXその他
+PLUGIN_NAME=入手不可能なコンテンツ
+PLUGIN_READY=Plugin ready!
+PLUGIN_DESC=オンライン、すれちがい通信、いつの間に通信、および通信交{0}換機能によって制限されているコンテンツをアンロックするためのチートプラグインです。これらの機能が終了していても、ゲームを100%コンプリートすることが可能になります！\n\nプラグイン作成者: {1}\n問題が発生した場合は、DQMJ3P Discordサーバーにて報告してください:\n{2}
+PLUGIN_B_TO_EXIT=\uE001 を押して終了します
+PLUGIN_WRONG_GAME={0}は\n{1}と{2}のためのプラグインです！
+PLUGIN_UNUSABLE_VERSION=このゲームは改変されているため、このプラグインでは使用できません。改変されていないバージョンを使用してください。
+PLUGIN_PRESS_SELECT=SELECTを押してメニューを開こう！
+PLUGIN_FREE_MEM_FULL=CTRPFの空きメモリがいっぱいです！
+PLUGIN_LANGUAGE_SWITCHED=新しい言語を適用するには、ゲームを再起動してください。
+
+# MessageBox
+MSGBOX_SUCCESS=成功
+MSGBOX_INFO=情報
+MSGBOX_QUESTION=確認
+MSGBOX_WARNING=警告
+MSGBOX_ERROR=エラー
+
+# 不正なエントリー
+CHEAT_UNOBTAINABLE_CONTENT_NAME=入手不可能なコンテンツ
+CHEAT_UNOBTAINABLE_CONTENT_DESC=入手不可能なコンテンツのうち、どれをアンロックするか選択してください。\n\n{0}注意：モンスターをアンロックするには、チートを有効にする必要があります。その後、インターネット通信広場へ向かい、一番右側にいる販売NPCに話しかけてください。チートが有効な状態では、本来入手できないモンスターのみが出現します。Wi-Fiコインが不足していても、それらを購入することが可能です！
+CHEAT_WIFI_COINS_NAME=ネットワークコイン
+CHEAT_WIFI_COINS_DESC=各ネットワークのコインを、それぞれ一定量、自分自身に付与してください。
+CHEAT_SWITCH_LANGUAGE_NAME=言語を切り替える
+CHEAT_SWITCH_LANGUAGE_DESC=プラグインの言語を切り替えます。
+
+# メニューキーボード
+KB_OPTION=\n選択肢を選んでください！
+KB_CATEGORY=\nカテゴリーを選んでください！
+KB_MONSTERS=モンスター
+KB_SKILLS=スキル
+KB_ITEMS=アイテム
+KB_TITLES=称号
+KB_CHOOSE_MONSTER=\nモンスターを選ぼう！
+KB_CHOOSE_SKILL=\nアンロックするスキルを選ぼう！
+KB_CHOOSE_ITEM=\nアイテムを選んでアンロックしよう！
+KB_CHOOSE_TITLE=\n称号を選んでアンロックしよう！
+KB_UNLOCK_METHODS=ロック解除方法
+KB_COINS_GET=\nどのコインをもらうか選んで！
+KB_COINS_AMOUNT=\n{0}の金額を入力してください：
+
+# メニューの選択肢
+CHOICE_YES=はい
+CHOICE_NO=いいえ
+CHOICE_ALL=[全て]
+CHOICE_MONSTERS_ON=ON [ー●]
+CHOICE_MONSTERS_OFF=OFF [●ー]
+
+# メニューポップアップ
+POPUP_MONSTERS_ON=チートが有効になりました！\nモンスターをアンロックするには、インターネット通信広場にいる一番右の販売NPCに話しかけてください。ネットワークコインが足りない場合でも、本来は入手できないモンスターを購入できるようになります。
+POPUP_MONSTERS_OFF=チートは無効になりました。\n元の動作に戻りました。
+POPUP_MONSTERS_HOW_TO_UNOCK=モンスターをアンロックするには、インターネット通信広場へ行き、一番右側にいる販売NPCに話しかけて、ネットワークコインをモンスターと交換しましょう！\nこのチートを使えば、ネットワークコインが足りなくても交換が可能になります！\n\nあらかじめチートを有効にしておくことを忘れないでください。
+POPUP_UNLOCK_SKILL_ALL=ライブラリに{0}個のスキルが解放され、対応する本がインベントリに追加されました！
+POPUP_UNLOCK_SKILL_SINGLE_BOOK={0}がアンロックされ、インベントリに{1}が1個追加されました！
+POPUP_UNLOCK_SKILL_SINGLE_BOOK_ONLY=インベントリに{0}が1個追加されました！
+POPUP_UNLOCK_ITEM_ALL=ライブラリで{0}個のアイテムがアンロックされ、インベントリに追加されました！
+POPUP_UNLOCK_ITEM_SINGLE={0}がライブラリでアンロックされ、インベントリに追加されました！
+POPUP_UNLOCK_ONCE_ALREADY_UNLOCKED=すでに{0}をアンロック済みです！\nこのアイテムは一度しか入手できません。
+POPUP_UNLOCK_TITLE_ALL=ライブラリで{0}タイトルがアンロックされました！
+POPUP_UNLOCK_TITLE_SINGLE=称号{0}がアンロックされました！
+POPUP_UNLOCK_TITLE_SINGLE_ALREADY_UNLOCKED=すでに称号{0}をアンロックしています。
+
+# ロック解除方法
+METHOD_HOW={0}の解放方法
+METHOD_IS_UNLOCKED=解放済み？
+METHOD_IN_STORAGE=預かり中？
+METHOD_DISK=インターネット通信広場でディスクをダウンロードできます。
+METHOD_STARTER=- このモンスターを最初の1体として選んだプレイヤーと\n交換する\n- すれちがいバトルスカウト可能
+METHOD_J3_TRANSFER=DQMJ3のセーブデータからモンスターを転送する。
+METHOD_STREETPASS=すれちがいのSQEXの刺客。
+METHOD_SPOTPASS=ワールドマップに出現するスポットパス配信。
+METHOD_SPOTPASS_DISK={0}: ワールドマップに出現するスポットパス配信。\n{1}:\n{2}
+METHOD_SPOTPASS_BOOK=ワールドマップのスポットパス配信モンスターが持っています。
+METHOD_STREETPASS_50=すれちがいバトルで50回勝利する。
+METHOD_WILDCARD_LEONYX=すれちがいバトルを100回行うごとに、\n{0}または{1}\nが報酬として手に入ります。
+METHOD_KING_SP={0}: {1}が所蔵\n（ダウンロード可能なディスク）。\n{2}: {3}が所蔵\n（ダウンロード可能なディスク）。
+METHOD_DEMONKING_SP={0}が所蔵（ダウンロード可能なディスク）。
+METHOD_EAST_STATION_J3=DQMJ3の東日本ニンテンドー3DSステーションで\n入手可能：スキルと一緒に{0}が\n配信されました。
+METHOD_WEST_STATION_J3=DQMJ3の西日本ニンテンドー3DSステーションで\n入手可能：スキルと一緒に{0}が\n配信されました。
+METHOD_EAST_STATION_J3P=東日本ニンテンドー3DSステーションで\n入手可能：スキルと一緒に{0}が\n配信されました。
+METHOD_WEST_STATION_J3P=西日本ニンテンドー3DSステーションで\n入手可能：スキルと一緒に{0}が\n配信されました。
+METHOD_SIRLOIN=以下のギフトコードを入力してください：」ちョＵ使Ｍｏ不ｒＥ憎火鬼花エ剣
+METHOD_TICKET=DQMJ3のモンスター転送機能を使って、\nウッドパークの黄色いフォンデュの後ろにある\n機械を調べてください。
+METHOD_STATUE_TERRY=マスターズGP・チャレンジャーズGPのチケットを30枚使い、\nインターネット通信広場のテリーの像に話しかけよう。
+METHOD_STATUE_MILLY=インターネット通信対戦で30回勝利し、\nインターネット通信広場のミレーユの像に話しかけよう。
+METHOD_STATUE_TARA=ゴールドコインとプラチナコインを30枚以上使い、\nインターネット通信広場のイルの像に話しかけよう。
+METHOD_STATUE_COBI=すれちがいの対戦で30回勝利し、\nインターネット通信広場のルカの像に話しかけよう。
+METHOD_WIFI_BATTLE_1=オンライン対戦を1回プレイする。
+METHOD_WIFI_BATTLE_10=オンライン対戦を10回プレイする。
+METHOD_WIFI_BATTLE_100=オンライン対戦を100回プレイする。
+METHOD_WIFI_PTS_10=オンラインポイントを10個集める。
+METHOD_WIFI_PTS_500=オンラインポイントを500個集める。
+METHOD_WIFI_PTS_1000=オンラインポイントを1000個集める。
+METHOD_WIFI_PTS_4000=オンラインポイントを4000個集める。
+METHOD_WIFI_PTS_5000=オンラインポイントを5000個集める。
+METHOD_WIFI_PTS_9999=オンラインポイントを9999個集める。
+METHOD_STREETPASS_MEET_10=すれちがいで10人と出会う。
+METHOD_STREETPASS_MEET_100=すれちがいで10人と出会う。
+METHOD_STREETPASS_MEET_1000=すれちがいで10人と出会う。
+METHOD_STREETPASS_WIN_10=すれちがいバトルで10勝する。
+METHOD_STREETPASS_WIN_100=すれちがいバトルで10勝する。
+METHOD_STREETPASS_WIN_1000=すれちがいバトルで10勝する。
+METHOD_MGP_PLAY=マスターズGPに1回参加する。
+METHOD_MGP_10000=マスターズGPで1万位以内に入る。
+METHOD_MGP_1000=マスターズGPで1,000位以内に入る。
+METHOD_MGP_100=マスターズGPでトップ100位以内に入る。
+METHOD_MGP_8=マスターズGPでトップ8に入る。
+METHOD_MGP_1=マスターズGPで1位になる。
+METHOD_CGP_PLAY=チャレンジャーズGPに1回参加する。
+METHOD_CGP_10000=チャレンジャーズGPで1万位以内に入る。
+METHOD_CGP_1000=チャレンジャーズGPで1,000位以内に入る。
+METHOD_CGP_100=チャレンジャーズGPでトップ100位以内に入る。
+METHOD_CGP_8=チャレンジャーズGPでトップ8に入る。
+METHOD_CGP_1=チャレンジャーズGPで1位になる。
+METHOD_COMMUNITY_1=5試合が行われたオンラインコミュニティを所有する。
+METHOD_COMMUNITY_2=10人以上のメンバーを擁し、\n50試合がプレイされたオンラインコミュニティを所有する。
+METHOD_COMMUNITY_3=100人以上のメンバーを擁し、\n500試合がプレイされたオンラインコミュニティを所有する。
+
+# コーナー
+COIN_BRONZE=ブロンズコイン
+COIN_SILVER=シルバーコイン
+COIN_GOLD=ゴールドコイン
+COIN_PLATINUM=プラチナコイン
+
+# その他
+ICONS_BIN_NOT_LOADED=プラグインのアイコンを読み込めませんでした。\nプラグインを再インストールしてください。
+MONSTER_CHECKSUM_SLOT_COUNT_EXEEDED=チェックサムスロットの数が上限を超えました。\n\nセーブファイルのバックアップを作成し、Discordサーバーにてこのエラーをご報告ください：\n{0}

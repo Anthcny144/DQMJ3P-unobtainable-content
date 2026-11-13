@@ -4,7 +4,8 @@
 using namespace CTRPluginFramework;
 
 Addr ProcessPlus::_addr = Macro::FREE_RAM_SPACE_ADDR;
-std::unordered_map<ARM::AddrType, Addr> ProcessPlus::_hookAddrs = {};
+std::unordered_map<ARM::HookType, Addr> ProcessPlus::_hookAddrs = {};
+const u32 CustomIconPlus::size = 30;
 
 void ProcessPlus::ClearFreeMem() {
     static u8 buffer[Macro::FREE_RAM_SPACE_SIZE] = {};
@@ -12,15 +13,15 @@ void ProcessPlus::ClearFreeMem() {
     _addr = Macro::FREE_RAM_SPACE_ADDR;
 }
 
-void ProcessPlus::WriteHook(const std::vector<u32>& instructions, std::initializer_list<ARM::AddrType> types) {
-    for (ARM::AddrType type : types)
+void ProcessPlus::WriteHook(const std::vector<u32>& instructions, std::initializer_list<ARM::HookType> types) {
+    for (ARM::HookType type : types)
         _hookAddrs[type] = _addr;
 
     for (u32 instruction : instructions)
         ProcessPlus::WriteFreeMem(instruction);
 }
 
-Addr ProcessPlus::GetHookAddr(ARM::AddrType type) {
+Addr ProcessPlus::GetHookAddr(ARM::HookType type) {
     if (_hookAddrs.contains(type))
         return _hookAddrs[type];
 
@@ -31,6 +32,12 @@ Addr ProcessPlus::GetNextFreeAddr() {
     return _addr;
 }
 
+void ProcessPlus::Exit() {
+    Process::ReturnToHomeMenu();
+    #define ever ;;
+    for(ever);
+}
+
 bool MessageBoxPlus::wrap(const std::string& title, const std::string& msg, DialogType dialogue, ClearScreen clear) {
     Sleep(Milliseconds(100));
     bool res = MessageBox(title, msg, dialogue, clear)();
@@ -38,25 +45,9 @@ bool MessageBoxPlus::wrap(const std::string& title, const std::string& msg, Dial
     return res;
 }
 
-CustomIcon CustomIconPlus::loadIcon(const std::string& path) {
-    bool fileOk = true;
-
-    u32 x = CustomIconPlus::size,
-        y = CustomIconPlus::size,
-        iconSize = x * y,
-        bufferSize = iconSize * sizeof(CustomIcon::Pixel);
-
-    File binary;
-    fileOk = File::Open(binary, path, File::READ) == 0;
-
-    CustomIcon::Pixel* pixelArray = new CustomIcon::Pixel[iconSize];
-    if (fileOk)
-        fileOk = binary.Read(pixelArray, bufferSize) == 0;
-
-    return CustomIcon(pixelArray,
-                      fileOk ? x : 0,
-                      fileOk ? y : 0,
-                      true);
+CustomIcon CustomIconPlus::loadIcon(std::vector<CustomIcon::Pixel>& iconsPixels, u32 iconIndex) {
+    CustomIcon::Pixel* ptr = iconsPixels.data() + iconIndex * CustomIconPlus::size * CustomIconPlus::size;
+    return CustomIcon(ptr, CustomIconPlus::size, CustomIconPlus::size, true);
 }
 
 void CustomIconPlus::draw(const Screen& screen, CustomIcon& icon, int drawX, int drawY, unsigned int scale) {

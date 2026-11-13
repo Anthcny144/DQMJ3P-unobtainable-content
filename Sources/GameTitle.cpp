@@ -3,53 +3,45 @@
 #include "GameTitle.hpp"
 #include "CTRPFExtension.hpp"
 #include "Macro.hpp"
-#include "String.hpp"
+#include "Text.hpp"
 #include <unordered_map>
 using namespace CTRPluginFramework;
 
 VersionBits GameTitle::versionBits = VersionBits::NONE;
 bool GameTitle::_isUpdate = false;
 
-bool GameTitle::init() {
-    // check if valid game
-    if (!GameTitle::isJ3() && !GameTitle::isJ3P()) {
-        MessageBoxPlus::wrap(String::error, String::wrongGame);
-        Process::ReturnToHomeMenu();
-        return false;
-    }
+int GameTitle::init() {
+    // Check if valid game
+    if (!GameTitle::isJ3() && !GameTitle::isJ3P())
+        return 1;
 
-    // determine if update is installed
+    // Determine if update is installed
     u32 count = 0;
     FS_MediaType media = MEDIATYPE_SD;
 
-    // get title count
+    // Get title count
     if (AM_GetTitleCount(media, &count) == 0) {
-        // free space to store titleIds
+        // Free space to store titleIds
         u64* titleIDs = (u64*)Macro::FREE_RAM_SPACE_ADDR;
 
-        // get list of installed titles
+        // Get list of installed titles
         u32 actualCount = 0;
         if (AM_GetTitleList(&actualCount, media, count, titleIDs) == 0) {
 
-            // search update title in list
+            // Search update title in list
             for (int i = 0; i < actualCount; i++)
                 if (titleIDs[i] == static_cast<u64>(GameTitle::isJ3P() ? TitleID::J3P_UPD : TitleID::J3_UPD))
                     _isUpdate = true;
         }
     }
 
-    // check game version (by picking random RAM addresses and reading their value)
+    // Check game version (by picking random RAM addresses and reading their value)
     bool validVersion = GameTitle::isValidVersion();
 
-    if (!validVersion) {
-        if (!MessageBoxPlus::wrap(String::warning, String::unusableVersion, DialogType::DialogYesNo)) {
-            MessageBoxPlus::wrap(String::warning, String::homeMenu);
-            Process::ReturnToHomeMenu();
-            return false;
-        }
-    }
+    if (!validVersion)
+        return 2;
 
-    // get version bits
+    // Get version bits
     if (GameTitle::isJ3()) {
         if (GameTitle::isUpdate())
             versionBits = VersionBits::J3_UPD;
@@ -64,7 +56,7 @@ bool GameTitle::init() {
             versionBits = VersionBits::J3P;
     }
 
-    return true;
+    return 0;
 }
 
 bool GameTitle::isJ3() {
@@ -80,7 +72,7 @@ bool GameTitle::isUpdate() {
 }
 
 bool GameTitle::isValidVersion() {
-    // read random ARM values to check if the base game is the same
+    // Read random ARM values to check if the base game is the same
     std::unordered_map<Addr, u32> checks;
     
     // J3 1.0

@@ -5,99 +5,58 @@
 using namespace CTRPluginFramework;
 
 void GameHook::init(std::vector<Monster>& monsters) {
-    ProcessPlus::WriteFreeMem((u32)0); // bool for cheat enabled
-    GameHook::_initBuyMonstersNotEnoughCoins();
+    ProcessPlus::WriteFreeMem((u32)0); // Bool for cheat enabled
+    for (int i = 0; i < 4; i++)
+        GameHook::_initBuyMonstersNotEnoughCoins(i);
     GameHook::_initmonstersCanBuy(monsters);
 }
 
-void GameHook::buyMonstersNotEnoughCoins(bool enable) {
-    static bool firstTime = true;
-    static std::array<u32, 4> backup = {0, 0, 0, 0};
+void GameHook::_initBuyMonstersNotEnoughCoins(int coinIdx) {
+    u32 funcOffset = 0x20;
 
-    Addr addr = ARM::getAddr(ARM::AddrType::HOOK_NOT_ENOUGH_WIFI_COINS);
+    Addr hookAddr = ARM::getGameHook(ARM::HookType::NOT_ENOUGH_WIFI_COINS) + coinIdx * funcOffset;
+    Addr destAddr = hookAddr + 4;
+    Addr entryAddr = ProcessPlus::GetNextFreeAddr();
+    Addr writeAddr = entryAddr + 0x10;
+    u32 ldrbFlag = 0xE55F0000 | (entryAddr + 8 - Macro::FREE_RAM_SPACE_ADDR);
 
-    // backup original jump if first time
-    if (firstTime) {
-        firstTime = false;
-
-        for (int i = 0; i < 4; i++)
-            Process::Read32(addr + i * 0x20, backup[i]);
-    }
-
-    for (int i = 0; i < 4; i++) {
-        u32 val = enable ? ARM::getBranchInstruction(addr + i * 0x20, ProcessPlus::GetHookAddr(ARM::AddrType::HOOK_NOT_ENOUGH_WIFI_COINS) + i * 0xC) : backup[i];
-        Process::Write32(addr + i * 0x20, val);
-    }
-}
-
-void GameHook::monstersCanBuy(bool enable) {
-    static u32 backup[2];
-    static bool firstTime = true;
-
-    static Addr addr[2] = {
-        ARM::getAddr(ARM::AddrType::HOOK_MONSTERS_CAN_BUY_SHOW),
-        ARM::getAddr(ARM::AddrType::HOOK_MONSTERS_CAN_BUY_FAMILIES)
+    std::vector<u32> instr_buyMonstersNotEnoughCoins = {
+        ldrbFlag,   // ldrb r0, [flag]
+        0xE3500001, // cmp r0, #1
+        0x03A01000, // moveq r1, #0
+        0xE1510002, // cmp r1, r2
+        ARM::getBranchInstruction(writeAddr, destAddr)
     };
 
-    // backup original jump if first time
-    if (firstTime) {
-        firstTime = false;
-        Process::Read32(addr[0], backup[0]);
-        Process::Read32(addr[1], backup[1]);
-    }
+    // Write hook
+    ProcessPlus::WriteHook(instr_buyMonstersNotEnoughCoins, {ARM::HookType::NOT_ENOUGH_WIFI_COINS});
 
-    for (int i = 0; i < 2; i++) {
-        ARM::AddrType type = i == 0 ? ARM::AddrType::HOOK_MONSTERS_CAN_BUY_SHOW : ARM::AddrType::HOOK_MONSTERS_CAN_BUY_FAMILIES;
-        u32 val = enable ? ARM::getBranchInstruction(addr[i], ProcessPlus::GetHookAddr(type), true) : backup[i];
-        Process::Write32(addr[i], val);
-    }
-}
-
-void GameHook::buyEveryMonsterKind(bool enable) {
-    if (!GameTitle::isJ3P())
-        return;
-
-    Addr addr = ARM::getAddr(ARM::AddrType::UNBUYABLE_MONSTERS);
-    Process::Write8(addr, !enable);
-}
-
-void GameHook::_initBuyMonstersNotEnoughCoins() {
-    // buy monsters if not enough coins
-    Addr destAddr = ARM::getAddr(ARM::AddrType::HOOK_NOT_ENOUGH_WIFI_COINS);
-    Addr writeAddr = ProcessPlus::GetNextFreeAddr();
-
-    std::array<std::vector<u32>, 4> instr_buyMonstersNotEnoughCoins = {
-        // mov r1, 0
-        // cmp r1, r2
-        // jump back
-        std::vector<u32>{0xE3A01000, 0xE1510002, ARM::getBranchInstruction(writeAddr + 8, destAddr + 4)}, // bronze coins
-        std::vector<u32>{0xE3A01000, 0xE1510002, ARM::getBranchInstruction(writeAddr + 0x14, destAddr + 0x24)}, // silver coins
-        std::vector<u32>{0xE3A01000, 0xE1510002, ARM::getBranchInstruction(writeAddr + 0x20, destAddr + 0x44)}, // gold coins
-        std::vector<u32>{0xE3A01000, 0xE1510002, ARM::getBranchInstruction(writeAddr + 0x2C, destAddr + 0x64)} // plat coins
-    };
-
-    for (std::vector<u32>& instructions : instr_buyMonstersNotEnoughCoins)
-        ProcessPlus::WriteHook(instructions, {ARM::AddrType::HOOK_NOT_ENOUGH_WIFI_COINS});
+    // Write jump
+    Process::Write32(hookAddr, ARM::getBranchInstruction(hookAddr, entryAddr));
 }
 
 void GameHook::_initmonstersCanBuy(std::vector<Monster>& monsters) {
-    // patch addresses
+    // Patch addresses
     Addr dest = ProcessPlus::GetNextFreeAddr();
-
-    Addr addr1 = ARM::getAddr(ARM::AddrType::HOOK_MONSTERS_CAN_BUY_SHOW);
+    Addr addr1 = ARM::getGameHook(ARM::HookType::MONSTERS_CAN_BUY_SHOW);
     u32 branch1 = ARM::getBranchInstruction(addr1, dest, true);
-    
-    Addr addr2 = ARM::getAddr(ARM::AddrType::HOOK_MONSTERS_CAN_BUY_FAMILIES);
+    Addr addr2 = ARM::getGameHook(ARM::HookType::MONSTERS_CAN_BUY_FAMILIES);
     u32 branch2 = ARM::getBranchInstruction(addr2, dest, true);
 
     Process::Write32(addr1, branch1);
     Process::Write32(addr2, branch2);
 
-    // monsters to display in WiFi Coins shop
+    // Get ldrb and beq instructions
+    Addr entry = ProcessPlus::GetNextFreeAddr();
+    Addr origFunc = ARM::getGameHook(ARM::HookType::MONSTERS_CAN_BUY_ORIGINAL);
+    u32 ldrbFlag = 0xE55F2000 | (entry + 8 - Macro::FREE_RAM_SPACE_ADDR);
+    u32 beqOrig = (ARM::getBranchInstruction(entry + 8, origFunc) & 0xFFFFFF) | 0x0A000000;
+
+    // Monsters to display in WiFi Coins shop
     std::vector<u32> instr_monstersCanBuy = {
-        0xE55F203C, // ldrb r2, [pc, #-0x3C] // TODO automate by calculaing offset from current PC and 0x1E81000
+        ldrbFlag, // ldrb r2, [flag]
         0xE3520000, // cmp r2, #0
-        ARM::getBranchInstruction(ProcessPlus::GetNextFreeAddr() + sizeof(u32) - 8, ARM::getAddr(ARM::AddrType::HOOK_MONSTERS_CAN_BUY_ORIGINAL)) - 0xE0000000 - 3, // beq ORIGINAL_FUNC
+        beqOrig, // beq ORIGINAL_FUNC
         0xE1A0200F, // mov r2, pc
         0xE282202C, // add r2, r2, #0x2C
         0xE1D200B0, // ldrh r0, [r2]
@@ -114,11 +73,11 @@ void GameHook::_initmonstersCanBuy(std::vector<Monster>& monsters) {
     };
 
     ProcessPlus::WriteHook(instr_monstersCanBuy, {
-        ARM::AddrType::HOOK_MONSTERS_CAN_BUY_SHOW,
-        ARM::AddrType::HOOK_MONSTERS_CAN_BUY_FAMILIES
+        ARM::HookType::MONSTERS_CAN_BUY_SHOW,
+        ARM::HookType::MONSTERS_CAN_BUY_FAMILIES
     });
 
-    // monster IDs
+    // Monster IDs
     for (Monster& monster : monsters)
         ProcessPlus::WriteFreeMem(monster.id);
 }

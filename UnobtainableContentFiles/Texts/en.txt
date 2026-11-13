@@ -1,0 +1,236 @@
+# Monsters
+MONSTER_01=Egg-en-ciel
+MONSTER_02=Sublime Slime
+MONSTER_03=Slider Kids
+MONSTER_04=Slider Girl
+MONSTER_05=Ultra Slime
+MONSTER_06=Nemeslime
+MONSTER_07=King Healslime
+MONSTER_08=Gome-chan
+MONSTER_09=Wyrmhole Dragon
+MONSTER_10=Equestrion
+MONSTER_11=Rebjørn
+MONSTER_12=Lunatick Board
+MONSTER_13=Lil' Tyke
+MONSTER_14=Alefgardian Conklave
+MONSTER_15=Aliahanian Conklave
+MONSTER_16=Zenithian Conklave
+MONSTER_17=Trodainian Conklave
+MONSTER_18=Crimson Killing Machine
+MONSTER_19=Sagittar
+MONSTER_20=Master CPU Q484
+MONSTER_21=Wulfspade Ace
+MONSTER_22=Ace of Spades
+MONSTER_23=Wildcard
+MONSTER_24=Zoma's Devil
+MONSTER_25=Starkers
+MONSTER_26=Tiko
+MONSTER_27=Kukri
+MONSTER_28=Numen
+MONSTER_29=Leonyx
+MONSTER_30=Leokid
+MONSTER_31=Gold Nochoro Z
+MONSTER_32=Platinum Nochoro Z
+MONSTER_33=J3-Rebel Axel
+MONSTER_34=J3-Rebel Wing
+MONSTER_35=J3-Rebel Marine
+MONSTER_36=Dark Lord Vurato
+MONSTER_37=Lucky Seven 'Oods
+MONSTER_38=Robbin' Ladies
+MONSTER_39=Rugius
+MONSTER_40=Hellsguard Veera
+MONSTER_41=Timelord Omega Rolex
+MONSTER_42=Cobrara
+
+# Skills
+SKILL_01=King SP
+SKILL_02=Demonking SP
+SKILL_03=DQ 30th SP
+SKILL_04=Great East
+SKILL_05=Wonder West
+SKILL_06=Jolly Eastern Gal
+SKILL_07=Elegant Western Gal
+SKILL_01_BOOK=King SP Book
+SKILL_02_BOOK=Demonking SP Book
+SKILL_03_BOOK=DQ 30th SP Book
+SKILL_04_BOOK=Great East Book
+SKILL_05_BOOK=Wonder West Book
+SKILL_06_BOOK=Jolly Eastern Gal Book
+SKILL_07_BOOK=Elegant Western Gal Book
+
+# Items
+ITEM_01=Sirloin Voucher
+ITEM_02=Accessory Ticket
+ITEM_03=Cottney's Album I
+ITEM_04=Cottney's Album II
+ITEM_05=Rottney's Album I
+ITEM_06=Rottney's Album II
+
+# Titles
+TITLE_01=Network Rookie
+TITLE_02=Network Master
+TITLE_03=Network Champ
+TITLE_04=Star Warrior
+TITLE_05=Nova Warrior
+TITLE_06=Galaxy Warrior
+TITLE_07=Astral Warrior
+TITLE_08=Space Warrior
+TITLE_09=Cosmic Warrior
+TITLE_10=Contact Rookie
+TITLE_11=Contact Vet
+TITLE_12=Contact Elite
+TITLE_13=Victory Rookie
+TITLE_14=Victory Vet
+TITLE_15=Victory Elite
+TITLE_16=MGP Rookie
+TITLE_17=MGP Top 10K
+TITLE_18=MGP Top 1K
+TITLE_19=MGP Top 100
+TITLE_20=MGP Top 8
+TITLE_21=MGP Champ
+TITLE_22=CGP Rookie
+TITLE_23=CGP Top 10K
+TITLE_24=CGP Top 1K
+TITLE_25=CGP Top 100
+TITLE_26=CGP Top 8
+TITLE_27=CGP Champ
+TITLE_28=Owner Rookie
+TITLE_29=Owner Veteran
+TITLE_30=Owner Elite
+
+# Used by other texts
+HELPER_MONSTER_LEONYX=Leonyx
+HELPER_MONSTER_WILDCARD=Wildcard
+HELPER_MONSTER_RUGIUS=Rugius
+HELPER_MONSTER_WULFSPADE_ACE=Wuldspade Ace
+HELPER_MONSTER_ACE_OF_SPADES=Ace of Spades
+HELPER_MONSTER_KING_HEALSLIME=King Healslime
+HELPER_MONSTER_SLIDER_GIRL=Slider Girl
+
+# 3GX misc
+PLUGIN_NAME=Unobtainable content
+PLUGIN_READY=Plugin ready!
+PLUGIN_DESC=A cheat plugin to unlock content locked behind online, StreetPass, SpotPass and trading features.\nAllows completing the game to 100% despite discontinued features!\n\nPlugin made by {1}\nIf you encounter any issue, please report it on the DQMJ3P Discord server:\n{2}
+PLUGIN_B_TO_EXIT=\uE001 to exit
+PLUGIN_WRONG_GAME={0} is a plugin for\n{1} and {2}!
+PLUGIN_UNUSABLE_VERSION=It looks like you have a modified version of the game that cannot be used with this plugin.\nPlease use the game version provided in the Discord server:\n{0}
+PLUGIN_PRESS_SELECT=Press Select to open the menu!
+PLUGIN_FREE_MEM_FULL=CTRPF free mem is full!
+PLUGIN_LANGUAGE_SWITCHED=Reboot the game to apply the new language.
+
+# MessageBox
+MSGBOX_SUCCESS=Success
+MSGBOX_INFO=Information
+MSGBOX_QUESTION=Question
+MSGBOX_WARNING=Warning
+MSGBOX_ERROR=Error
+
+# Cheat entries
+CHEAT_UNOBTAINABLE_CONTENT_NAME=Unobtainable content
+CHEAT_UNOBTAINABLE_CONTENT_DESC=Choose what unobtainable content to unlock.\n\n{0}NOTES: For monsters, you must enable the cheat. Then head to the Wi-Fi Square and talk to the rightmost seller NPC. If the cheat is enabled, only unobtainable monsters will appear. You will be able to buy them even if you lack the necessary Wi-Fi Coins!
+CHEAT_WIFI_COINS_NAME=Wi-Fi Coins
+CHEAT_WIFI_COINS_DESC=Give yourself a specific amount of each Wi-Fi Coin.
+CHEAT_SWITCH_LANGUAGE_NAME=Switch language
+CHEAT_SWITCH_LANGUAGE_DESC=Switch the plugin's language.
+
+# Menu keyboard
+KB_OPTION=\nChoose an option!
+KB_CATEGORY=\nChoose a category!
+KB_MONSTERS=Monsters
+KB_SKILLS=Skills
+KB_ITEMS=Items
+KB_TITLES=Titles
+KB_CHOOSE_MONSTER=\nChoose a monster!
+KB_CHOOSE_SKILL=\nChoose a skill to unlock!
+KB_CHOOSE_ITEM=\nChoose an item to unlock!
+KB_CHOOSE_TITLE=\nChoose a title to unlock!
+KB_UNLOCK_METHODS=Unlock methods
+KB_COINS_GET=\nChoose which coin to get!
+KB_COINS_AMOUNT=\nEnter the {0} amount:
+
+# Menu choices
+CHOICE_YES=Yes
+CHOICE_NO=No
+CHOICE_ALL=[ALL]
+CHOICE_MONSTERS_ON=ON [ー●]
+CHOICE_MONSTERS_OFF=OFF [●ー]
+
+# Menu popups
+POPUP_MONSTERS_ON=The cheat is now enabled!\nTo unlock the monsters, talk to the rightmost seller NPC at the Wi-Fi Square. You will be able to buy the unobtainable monsters even if you lack Wi-Fi Coins to buy them.
+POPUP_MONSTERS_OFF=The cheat is now disabled.\nThe original behavior was restored.
+POPUP_MONSTERS_HOW_TO_UNOCK=To unlock monsters, go to the Wi-Fi Square and talk to the rightmost seller NPC to exchange Wi-Fi Coins with monsters!\nThe cheat will allow you to exchange even if you lack Wi-Fi Coins!\n\nMake sure to enable the cheat first.
+POPUP_UNLOCK_SKILL_ALL={0} skill(s) has been unlocked in the library and the corresponding books have been added in your inventory!
+POPUP_UNLOCK_SKILL_SINGLE_BOOK={0} has been unlocked and\n1x {1} was added in your inventory!
+POPUP_UNLOCK_SKILL_SINGLE_BOOK_ONLY=1x {0} was added in your inventory!
+POPUP_UNLOCK_ITEM_ALL={0} item(s) have been unlocked in the library and added in your inventory!
+POPUP_UNLOCK_ITEM_SINGLE={0} has been unlocked in the library and added in your inventory!
+POPUP_UNLOCK_ONCE_ALREADY_UNLOCKED=You already unlocked {0}!\nThis item is obtainable only once.
+POPUP_UNLOCK_TITLE_ALL={0} title(s) have been unlocked in the library!
+POPUP_UNLOCK_TITLE_SINGLE=Title {0} has been unlocked!
+POPUP_UNLOCK_TITLE_SINGLE_ALREADY_UNLOCKED=You already unlocked title {0}.
+
+# Unlock methods
+METHOD_HOW=How to unlock {0}
+METHOD_IS_UNLOCKED=Is unlocked?
+METHOD_IN_STORAGE=In storage?
+METHOD_DISK=Downloadable disk at the Wi-Fi Square.
+METHOD_STARTER=- Trade with a player\n- Scoutable through StreetPass battles
+METHOD_J3_TRANSFER=Transfer the monster from a DQMJ3 save.
+METHOD_STREETPASS=SQEX StreetPass distributions.
+METHOD_SPOTPASS=SpotPass distributions that spawn in the World Map.
+METHOD_SPOTPASS_DISK={0}: SpotPass distributions that\nspawn in the World Map.\n{1}: {2}
+METHOD_SPOTPASS_BOOK=Held by SpotPass distributions monsters in the World Map.
+METHOD_STREETPASS_50=Win 50 StreetPass battles.
+METHOD_WILDCARD_LEONYX=Every 100 won StreetPass battle\nwill either reward {0} or {1}.
+METHOD_KING_SP={0}: Held by {1} (downloadable disk).\n{2}: Held by {3} (downloadable disk).
+METHOD_DEMONKING_SP=Held by {0} (downloadable disk).
+METHOD_EAST_STATION_J3=Obtainable from japanese eastern Nintendo 3DS\nStations from DQMJ3: a {0} was\ndistributed with the skill.
+METHOD_WEST_STATION_J3=Obtainable from japanese western Nintendo 3DS\nStations from DQMJ3: a {0} was\ndistributed with the skill.
+METHOD_EAST_STATION_J3P=Obtainable from japanese eastern Nintendo 3DS\nStations: a {0} was distributed with the skill.
+METHOD_WEST_STATION_J3P=Obtainable from japanese western Nintendo 3DS\nStations: a {0} was distributed with the skill.
+METHOD_SIRLOIN=Input the following Gift Code:\n」ちョＵ使Ｍｏ不ｒＥ憎火鬼花エ剣
+METHOD_TICKET=Use the DQMJ3 monster transfer feature and\ninspect the machine in Wood Park behind the\nyellow Fondude.
+METHOD_STATUE_TERRY=Use 30 Masters / Challengers GP tickets and talk to\nthe Terry statue in the Wi-Fi Square.
+METHOD_STATUE_MILLY=Win 30 Wi-Fi matches and talk to the Milly statue\nin the Wi-Fi Square.
+METHOD_STATUE_TARA=Spend at least 30 Gold and Platinum Coins and\ntalk to the Tara statue in the Wi-Fi Square.
+METHOD_STATUE_COBI=Win 30 StreetPass matches and talk to the Cobi\nstatue in the Wi-Fi Square.
+METHOD_WIFI_BATTLE_1=Play 1 Wi-Fi battle.
+METHOD_WIFI_BATTLE_10=Play 10 Wi-Fi battles.
+METHOD_WIFI_BATTLE_100=Play 100 Wi-Fi battles.
+METHOD_WIFI_PTS_10=Gather 10 Wi-Fi points.
+METHOD_WIFI_PTS_500=Gather 500 Wi-Fi points.
+METHOD_WIFI_PTS_1000=Gather 1000 Wi-Fi points.
+METHOD_WIFI_PTS_4000=Gather 4000 Wi-Fi points.
+METHOD_WIFI_PTS_5000=Gather 5000 Wi-Fi points.
+METHOD_WIFI_PTS_9999=Gather 9999 Wi-Fi points.
+METHOD_STREETPASS_MEET_10=Meet 10 people via StreetPass.
+METHOD_STREETPASS_MEET_100=Meet 100 people via StreetPass.
+METHOD_STREETPASS_MEET_1000=Meet 1000 people via StreetPass.
+METHOD_STREETPASS_WIN_10=Win 10 StreetPass battles.
+METHOD_STREETPASS_WIN_100=Win 100 StreetPass battles.
+METHOD_STREETPASS_WIN_1000=Win 1000 StreetPass battles.
+METHOD_MGP_PLAY=Participate in Masters GP once.
+METHOD_MGP_10000=Get placed in the top 10,000 in Masters GP.
+METHOD_MGP_1000=Get placed in the top 1,000 in Masters GP.
+METHOD_MGP_100=Get placed in the top 100 in Masters GP.
+METHOD_MGP_8=Get placed in the top 8 in Masters GP.
+METHOD_MGP_1=Get placed #1 in Masters GP.
+METHOD_CGP_PLAY=Participate in Challengers GP once.
+METHOD_CGP_10000=Get placed in the top 10,000 in Challengers GP.
+METHOD_CGP_1000=Get placed in the top 1,000 in Challengers GP.
+METHOD_CGP_100=Get placed in the top 100 in Challengers GP.
+METHOD_CGP_8=Get placed in the top 8 in Challengers GP.
+METHOD_CGP_1=Get placed #1 in Challengers GP.
+METHOD_COMMUNITY_1=Own a Wi-Fi community with 5 matches played.
+METHOD_COMMUNITY_2=Own a Wi-Fi community with 10 players or more\nwith 50 matches played.
+METHOD_COMMUNITY_3=Own a Wi-Fi community with 100 players or more\nwith 500 matches played.
+
+# Coins
+COIN_BRONZE=Bronze Coins
+COIN_SILVER=Silver Coins
+COIN_GOLD=Gold Coins
+COIN_PLATINUM=Platinum Coins
+
+# Misc
+ICONS_BIN_NOT_LOADED=The plugin icons could not be loaded.\nPlease reinstall the plugin.
+MONSTER_CHECKSUM_SLOT_COUNT_EXEEDED=Checksum slot count exceeded.\n\nPlease make a backup of your save file and report this error on the Discord server:\n{0}
